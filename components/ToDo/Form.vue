@@ -7,12 +7,21 @@
             </div>
             <div class="input-line"> 
                 <label>deathline</label>
-            <input type="date" id="fname" name="task"  class="input" v-model="deathline">
-        </div>
-        <div class="input-line"> 
+                <input type="date" id="fname" name="task"  class="input" v-model="deathline">
+            </div>
+            <div class="input-line"> 
                 <label>description</label>
-            <input type="text" id="fname" name="task" placeholder="type the description of the task" class="input" v-model="taskDescription">
-        </div>
+                <input type="text" id="fname" name="task" placeholder="type the description of the task" class="input" v-model="taskDescription">
+            </div>
+            <div class="input-line"> 
+                <label>priority</label>
+                <select v-model="priority" class="input">
+                    <option value="">Priority</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium </option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
             <button class="button" @click="addTaskhandle">Add task</button>
         </form>
     </div>
@@ -22,11 +31,24 @@
 const taskName = ref('')
 const deathline = ref('')
 const taskDescription = ref('')
+const priority = ref('')
 const addTaskhandle = (e) => {
     e.preventDefault()
     console.log('taskName', taskName.value)
     console.log('deathline', deathline.value)
     console.log('taskDescription', taskDescription.value)
+    console.log('priority', priority.value)
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    tasks.push({
+        taskName: taskName.value,
+        deathline: deathline.value,
+        taskDescription: priority.value,
+        priority: priority.value,
+        id: `${Date.now()}-${Math.random()}`
+    })
+    console.log('tasks localStorage', tasks)
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
 }
 </script>
 
@@ -74,19 +96,21 @@ input::placeholder {
     /* display: flex;
     flex-direction: column;
     align-items: center; */
+    margin-bottom: 3rem;
 
 }
 .input-line{
     width: 100%;
     /* border: 2px solid black; */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 1rem;
 }
 label {
    margin-right: 2rem;
    font-size: 1.7rem;
    font-family: system-ui;
+   width: 20%;
 }
 
 </style>
