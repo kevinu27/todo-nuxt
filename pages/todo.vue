@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <p>todo</p>
+    <section class="todo">
+        <p>todo--</p>
         <ToDoSearchBar>
         </ToDoSearchBar>
-    </div>
+        <ToDoList>
+        </ToDoList>
+        <ToDoForm>
+        </ToDoForm>
+    </section>
 </template>

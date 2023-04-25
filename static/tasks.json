@@ -1,0 +1,29 @@
+{
+    "tasks": [
+      {
+        "taskName": "Finish project proposal",
+        "endDate": "2023-05-10",
+        "priority": "high"
+      },
+      {
+        "taskName": "Prepare presentation slides",
+        "endDate": "2023-05-15",
+        "priority": "medium"
+      },
+      {
+        "taskName": "Review and finalize report",
+        "endDate": "2023-05-20",
+        "priority": "high"
+      },
+      {
+        "taskName": "Meet with client to discuss project updates",
+        "endDate": "2023-05-25",
+        "priority": "medium"
+      },
+      {
+        "taskName": "Follow up with team on progress",
+        "endDate": "2023-06-01",
+        "priority": "low"
+      }
+    ]
+  }

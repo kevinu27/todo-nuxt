@@ -1,3 +1,9 @@
 <template>
-    <p>List</p>
+    <div>
+        <p>List</p>
+    </div>
 </template>
+
+<script>
+
+</script>

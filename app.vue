@@ -1,9 +1,12 @@
 <template>
   <div>
-    <p>skffjgk</p>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
-    <NuxtWelcome />
+    <!-- <NuxtWelcome /> -->
   </div>
 </template>
+
+<style >
+
+</style>
