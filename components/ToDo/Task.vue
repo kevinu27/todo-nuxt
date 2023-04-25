@@ -2,40 +2,34 @@
     <div class="task">
         <div class="closing" @click="removingTask"><p>+ </p></div>
         <h1>
-            {{ taskData.taskName }}
+            {{ props.task.taskName }}
         </h1>
         <p>
-           Priority: {{ taskData.priority }}
+           Priority: {{ props.task.priority }}
         </p>
         <p>
-            Deathline: {{ taskData.deathline }}
+            Deathline: {{ props.task.deathline }}
         </p>
     </div>
 </template>
 
-<script>
 
-export default {
-  props: {
-    task: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-    taskData: this.task
-    };
-  },
-  methods: {
-    removingTask (){
-        console.log('removing', this.taskData.id)
-        
-    }
-  }
-}
+<script setup>
+const props = defineProps({
+  task: Object
+})
+const taskData = ref('')
+onMounted(() => {
 
+console.log('task', props.task)
+taskData.value =  props.task
+
+  })
+    const removingTask = (e)=> {
+        console.log('removing', taskData.value.id) 
+    }
 </script>
+
 
 <style scoped>
 .task {
