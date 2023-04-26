@@ -12,6 +12,9 @@
 
 <script setup>
 const tasks = ref()
+import { useTodoStore } from '~/store/todo';
+const tasksStore = useTodoStore()
+tasksStore.setTasksFromStorage()
 
 onMounted(() => {
     console.log("Component onMounted");

@@ -15,19 +15,18 @@
 
 
 <script setup>
+// import { useTodoStore } from '~/store/index.js'
+
 const props = defineProps({
   task: Object
 })
 const taskData = ref('')
-onMounted(() => {
 
+onMounted(() => {
 console.log('task', props.task)
 taskData.value =  props.task
-
+// console.log('useTodoStore', useTodoStore)
   })
-
-
-    
 </script>
 
 
