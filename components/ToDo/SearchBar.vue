@@ -1,6 +1,6 @@
 <template>
     <div class="search-bar">
-        <p>Search Bar</p>
+        <!-- <p>Search Bar</p> -->
         <form action="" class="form">
             <input type="text" id="fname" name="task" placeholder="search a tasks..." class="input">
             <button class="button">Search</button>

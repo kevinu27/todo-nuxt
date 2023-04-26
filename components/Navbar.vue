@@ -26,6 +26,7 @@
     font-family: system-ui;
     width: auto;
     margin: 0;
+    margin-bottom: 5rem;
     /* padding: 0; */
 
 }

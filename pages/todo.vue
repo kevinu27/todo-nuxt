@@ -1,6 +1,6 @@
 <template>
     <section class="todo">
-        <p>todo--</p>
+        <p>todo-- esta pagina sobra</p>
         <ToDoSearchBar>
         </ToDoSearchBar>
         <ToDoList>

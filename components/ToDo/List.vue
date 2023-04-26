@@ -4,7 +4,7 @@
             v-for="task in tasks"
             :key="task.id"
         >
-        <ToDoTask :task="task"/>    
+        <ToDoTask :task="task" @removeTask="removeTask"/>    
     </div>
        
     </div>
@@ -16,9 +16,16 @@ const tasks = ref()
 onMounted(() => {
     console.log("Component onMounted");
     tasks.value =  JSON.parse(localStorage.getItem("tasks"));
-    // console.log(tasks.value) 
 
   })
+
+  const removeTask = (taskId) => {
+    console.log('taskId', taskId)
+    console.log('tasksref', tasks.value)
+    tasks.value = tasks.value.filter(task => task.id !== taskId)
+    localStorage.setItem("tasks", JSON.stringify( tasks.value));
+    console.log('filteredTasks', tasks.value)
+  }
 
 </script>
 

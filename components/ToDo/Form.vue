@@ -34,10 +34,10 @@ const taskDescription = ref('')
 const priority = ref('')
 const addTaskhandle = (e) => {
     e.preventDefault()
-    console.log('taskName', taskName.value)
-    console.log('deathline', deathline.value)
-    console.log('taskDescription', taskDescription.value)
-    console.log('priority', priority.value)
+    // console.log('taskName', taskName.value)
+    // console.log('deathline', deathline.value)
+    // console.log('taskDescription', taskDescription.value)
+    // console.log('priority', priority.value)
     const tasks = JSON.parse(localStorage.getItem("tasks"));
     tasks.push({
         taskName: taskName.value,

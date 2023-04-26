@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-    <p>index de pages</p>
+    <!-- <p>index de pages</p> -->
         <section class="todo">
         <ToDoSearchBar/>
         <ToDoForm/>

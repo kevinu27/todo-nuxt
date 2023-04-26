@@ -1,6 +1,6 @@
 <template>
     <div class="task">
-        <div class="closing" @click="removingTask"><p>+ </p></div>
+        <div class="closing"  @click="$emit('removeTask', props.task.id)" ><p>+ </p></div>
         <h1>
             {{ props.task.taskName }}
         </h1>
@@ -25,9 +25,9 @@ console.log('task', props.task)
 taskData.value =  props.task
 
   })
-    const removingTask = (e)=> {
-        console.log('removing', taskData.value.id) 
-    }
+
+
+    
 </script>
 
 
@@ -42,6 +42,9 @@ taskData.value =  props.task
     background-color: #c2e7ef;
     margin-bottom: 1rem;
     border-radius: 1rem;
+    box-shadow: 5px 5px 5px rgba(30, 30, 30, 0.3);
+    padding-bottom: 2rem;
+
 }
 .task p{
     margin: 0;
