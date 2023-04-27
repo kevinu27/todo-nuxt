@@ -15,12 +15,14 @@ const tasks = ref()
 import { useTodoStore } from '~/store/todo';
 const tasksStore = useTodoStore()
 tasksStore.setTasksFromStorage()
-console.log('tasksStore.tasks()', tasksStore.tasks)
-tasks.value = tasksStore.getTasks()
+// tasksStore.getTasks()
+// tasks.value = tasksStore.getTasks()
 
 onMounted(() => {
     console.log("Component onMounted");
-    tasks.value =  JSON.parse(localStorage.getItem("tasks"));
+    // tasks.value =  JSON.parse(localStorage.getItem("tasks"));
+    console.log('tasksStore.tasks', tasksStore.tasks)
+    tasks.value = tasksStore.tasks
   })
 
 </script>

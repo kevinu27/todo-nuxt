@@ -4,6 +4,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
     state: () => ({
         tasks: [],
     }),
+
     actions: {
         async setTasksFromStorage() {
             const tasks = await JSON.parse(localStorage.getItem("tasks"));
@@ -25,10 +26,6 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
             console.log('tasks localStorage', tasks)
             localStorage.setItem("tasks", JSON.stringify(tasks));
             this.tasks = tasks
-        },
-        async getTasks() {
-            console.log('---get task----')
-            this.tasks = JSON.parse(localStorage.getItem("tasks"));
         }
     }
 

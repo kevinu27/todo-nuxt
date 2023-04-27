@@ -1,29 +1,3 @@
 {
-    "tasks": [
-      {
-        "taskName": "Finish project proposal",
-        "endDate": "2023-05-10",
-        "priority": "high"
-      },
-      {
-        "taskName": "Prepare presentation slides",
-        "endDate": "2023-05-15",
-        "priority": "medium"
-      },
-      {
-        "taskName": "Review and finalize report",
-        "endDate": "2023-05-20",
-        "priority": "high"
-      },
-      {
-        "taskName": "Meet with client to discuss project updates",
-        "endDate": "2023-05-25",
-        "priority": "medium"
-      },
-      {
-        "taskName": "Follow up with team on progress",
-        "endDate": "2023-06-01",
-        "priority": "low"
-      }
-    ]
+    "tasks": [{"taskName":"Hacer curso de vue3","deathline":"2023-04-28","taskDescription":"High","priority":"High","id":"1682503990464-0.722604643809883"},{"taskName":"hacer curso de nuxt","deathline":"2023-05-05","taskDescription":"Medium","priority":"Medium","id":"1682504197993-0.9039963289004938"},{"taskName":"hacer ecommerce","deathline":"2023-05-12","taskDescription":"Medium","priority":"Medium","id":"1682504275803-0.9287695779830745"}]
   }
