@@ -28,23 +28,16 @@
 </template>
 
 <script setup>
+import { useTodoStore } from '~/store/todo';
+const tasksStore = useTodoStore()
 const taskName = ref('')
 const deathline = ref('')
 const taskDescription = ref('')
 const priority = ref('')
+const id = `${Date.now()}-${Math.random()}`
 const addTaskhandle = (e) => {
     e.preventDefault()
-    const tasks = JSON.parse(localStorage.getItem("tasks"));
-    tasks.push({
-        taskName: taskName.value,
-        deathline: deathline.value,
-        taskDescription: priority.value,
-        priority: priority.value,
-        id: `${Date.now()}-${Math.random()}`
-    })
-    console.log('tasks localStorage', tasks)
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-
+    tasksStore.addTask(taskName.value, deathline.value, taskDescription.value, priority.value, id)
 }
 </script>
 

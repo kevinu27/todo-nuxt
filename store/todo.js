@@ -12,6 +12,23 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         async removeTasksFromStorage(taskId) {
             this.tasks =  this.tasks.filter(task => task.id !== taskId)
             localStorage.setItem("tasks", JSON.stringify(  this.tasks));
+        },
+        async addTask(taskName, deathline, taskDescription, priority, id) {
+            const tasks = JSON.parse(localStorage.getItem("tasks"));
+            tasks.push({
+                taskName: taskName,
+                deathline: deathline,
+                taskDescription: priority,
+                priority: priority,
+                id: id
+            })
+            console.log('tasks localStorage', tasks)
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            this.tasks = tasks
+        },
+        async getTasks() {
+            console.log('---get task----')
+            this.tasks = JSON.parse(localStorage.getItem("tasks"));
         }
     }
 
