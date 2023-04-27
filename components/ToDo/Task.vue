@@ -1,6 +1,6 @@
 <template>
     <div class="task">
-        <div class="closing"  @click="$emit('removeTask', props.task.id)" ><p>+ </p></div>
+        <div class="closing"  @click="removeTask" ><p>+ </p></div>
         <h1>
             {{ props.task.taskName }}
         </h1>
@@ -15,7 +15,8 @@
 
 
 <script setup>
-// import { useTodoStore } from '~/store/index.js'
+import { useTodoStore } from '~/store/todo';
+const tasksStore = useTodoStore()
 
 const props = defineProps({
   task: Object
@@ -23,16 +24,18 @@ const props = defineProps({
 const taskData = ref('')
 
 onMounted(() => {
-console.log('task', props.task)
 taskData.value =  props.task
-// console.log('useTodoStore', useTodoStore)
-  })
+})
+
+const removeTask = () => {
+    console.log('--------- props.task.id', props.task.id)
+    tasksStore.removeTasksFromStorage(props.task.id)
+}
 </script>
 
 
 <style scoped>
 .task {
-    /* border: 3px solid red; */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -56,13 +59,11 @@ taskData.value =  props.task
     font-size: 36px;
 }
 .closing{
-    /* border: 2px solid red; */
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 .closing p {
-    /* padding-top: 1rem; */
     font-size: 3rem;
     margin:0;
     padding:0;

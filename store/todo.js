@@ -2,12 +2,16 @@ import { defineStore } from "pinia";
 
 export const useTodoStore = defineStore('todo', { //'todo' nombre del store
     state: () => ({
-        task: [],
+        tasks: [],
     }),
     actions: {
         async setTasksFromStorage() {
-            const task = await JSON.parse(localStorage.getItem("tasks"));
-            console.log('taskStore', task)
+            const tasks = await JSON.parse(localStorage.getItem("tasks"));
+            this.tasks = tasks
+        },
+        async removeTasksFromStorage(taskId) {
+            this.tasks =  this.tasks.filter(task => task.id !== taskId)
+            localStorage.setItem("tasks", JSON.stringify(  this.tasks));
         }
     }
 

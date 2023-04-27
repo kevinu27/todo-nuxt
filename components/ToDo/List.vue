@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <div class="task-container"
-            v-for="task in tasks"
+            v-for="task in tasksStore.tasks"
             :key="task.id"
         >
         <ToDoTask :task="task" @removeTask="removeTask"/>    
@@ -15,6 +15,7 @@ const tasks = ref()
 import { useTodoStore } from '~/store/todo';
 const tasksStore = useTodoStore()
 tasksStore.setTasksFromStorage()
+console.log('tasksStore.tasks---s', tasksStore.tasks)
 
 onMounted(() => {
     console.log("Component onMounted");
