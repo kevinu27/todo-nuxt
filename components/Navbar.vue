@@ -1,13 +1,28 @@
 <template>
-    <div class="nav-bar" >
-        <NuxtLink to="/" class="logo"><p>TO-DO List</p></NuxtLink> 
-        <div class="right-buttons">
-            <div class="menu-item" to="/auth" @click="authHandler">Login</div> 
-            <NuxtLink class="menu-item" to="/auth">section</NuxtLink> 
-            <!-- <a>df</a>
-            <a>df</a> -->
-        </div>
-    </div>
+    <div>
+
+        <div class="nav-bar" >
+            <NuxtLink to="/" class="logo"><p>TO-DO List</p></NuxtLink> 
+            <div class="right-buttons">
+                <div class="menu-item" to="/auth" @click="authHandler">Login</div> 
+                <NuxtLink class="menu-item" to="/auth">section</NuxtLink> 
+                <!-- <a>df</a>
+                    <a>df</a> -->
+                </div>
+            </div>
+    <AuthModal>
+        <h1>Signup</h1>
+        <h3>name</h3>
+        <input type="text" />
+        <h3>email</h3>
+        <input type="email" />
+        <h3>password</h3>
+        <input type="password" />
+        <div><p>Authenticating...</p></div>
+        <br />
+        <button class="loginButton">Signup</button>
+    </AuthModal>
+</div>
 </template>
 
 <script setup>
@@ -19,9 +34,10 @@ const authStore = useAuthStore()
 const authHandler = (e) => {
     console.log("login clicked")
     authStore.setAuthModal(true)
-    // e.preventDefault()
-    // tasksStore.addTask(taskName.value, deathline.value, taskDescription.value, priority.value, id)k
-
+}
+  const closeModal = (e) => {
+    console.log("closing clicked")
+    authStore.setAuthModal(false)
 
 }
 </script>

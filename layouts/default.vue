@@ -2,36 +2,26 @@
     <div class="default-layout">
       <Navbar />
       
-      <div class="modal-overlay" v-if="authStore.authModal"></div>
-      <div class="modal" v-if="authStore.authModal">
-        <div class="closingX" @click="closeModal">
-          <h1>X</h1>
-        </div>
-        <h1>Signup</h1>
-        <h3>name</h3>
-        <input type="text" />
-        <h3>email</h3>
-        <input type="email" />
-        <h3>password</h3>
-        <input type="password" />
-        <div><p>Authenticating...</p></div>
-        <br />
-        <button class="loginButton">Signup</button>
-      </div>
+<!-- <AuthModal>
+            <h1>Signup</h1>
+            <h3>name</h3>
+            <input type="text" />
+            <h3>email</h3>
+            <input type="email" />
+            <h3>password</h3>
+            <input type="password" />
+            <div><p>Authenticating...</p></div>
+            <br />
+            <button class="loginButton">Signup</button>
+</AuthModal> -->
+
   
       <slot />
     </div>
   </template>
   
   <script setup>
-  import { useAuthStore } from "~/store/auth";
-  const authStore = useAuthStore();
-  const closeModal = (e) => {
-    console.log("closing clicked")
-    authStore.setAuthModal(false)
 
-
-}
   </script>
   
   <style>
