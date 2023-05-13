@@ -4,10 +4,11 @@
         <div class="nav-bar" >
             <NuxtLink to="/" class="logo"><p>TO-DO List</p></NuxtLink> 
             <div class="right-buttons">
-                <div class="menu-item" to="/auth" @click="authHandler">Login</div> 
+                <div class="menu-item" to="/auth" @click="authModal">Login</div> 
                 <NuxtLink class="menu-item" to="/auth">section</NuxtLink> 
                 <!-- <a>df</a>
                     <a>df</a> -->
+                    
                 </div>
             </div>
     <AuthModal>
@@ -20,18 +21,26 @@
         <input type="password" />
         <div><p>Authenticating...</p></div>
         <br />
-        <button class="loginButton">Signup</button>
+        <button class="loginButton" @click="loginHandler">Signup</button>
     </AuthModal>
 </div>
 </template>
 
 <script setup>
 import { useAuthStore } from '~/store/auth';
+import axios from 'axios'
+// import api from '.nuxt/boot/axios.js'
+const api = axios.create({
+  baseURL: 'http://localhost:5000/api/v1',
+  withCredentials: true
+});
+
 const authStore = useAuthStore()
 // const authModal = ref(false)
+const token = ref('')
+const expiresIn = ref ('')
 
-
-const authHandler = (e) => {
+const authModal = (e) => {
     console.log("login clicked")
     authStore.setAuthModal(true)
 }
@@ -40,6 +49,64 @@ const authHandler = (e) => {
     authStore.setAuthModal(false)
 
 }
+
+const loginHandler = async (e) => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
+    e.preventDefault
+    console.log("login apretado")
+    axios.post('http://localhost:5000/api/v1/login',     {
+    email: "kevin2@prueba.com",
+    password: "123123"
+    })
+    .then(res => {
+        console.log('res----', res)
+        token.value = res.data.token
+        authStore.setAuthToken(res.data.token)
+        expiresIn.value = res.data.expiresIn
+
+        const cookie = {
+            token: res.data.token,
+            expiresIn: res.data.expiresIn
+        };
+        
+        // const encodedCookie = encodeURIComponent(JSON.stringify(cookie));
+        // document.cookie = `refreshToken=${encodedCookie}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+        document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+
+
+    }).catch(e => console.log(e))
+    // lo mismo pero haciendo con el try and catch y el async await
+    // try {
+    //    const res = await axios.post('http://localhost:5000/api/v1/login', {
+    //         email: "kevin2@prueba.com",
+    //         password: "123123"
+    //     })
+    //     console.log('res----', res.data)
+    // } catch(error) {
+    //     console.log(error)
+  
+    // }
+
+
+
+    // https://universal-backend.onrender.com/api/v1/login
+//     {
+//     "email": "kevin2@prueba.com",
+//     "password": "123123"
+// }
+
+}
+
+const refreshToken = async() => {
+    try { 
+        const res = await api.get('/refresh')
+        console.log('refresh Token', res.data)
+        token.value = res.data.token
+        expiresIn.value = res.data.expiresIn
+    } catch (error) {
+        console.log('refreshToken error', error)
+    }
+}
+refreshToken()
 </script>
 
 <style scoped>

@@ -28,16 +28,48 @@
 </template>
 
 <script setup>
+import axios from 'axios'
 import { useTodoStore } from '~/store/todo';
+import { useAuthStore } from '~/store/auth';
+const authStore = useAuthStore()
+// esto de api de axios importartarlo desde otro archivo, quizas desde un composables
+const api = axios.create({
+  baseURL: "http://localhost:5000/api/v1",
+  withCredentials: true
+});
 const tasksStore = useTodoStore()
 const taskName = ref('')
 const deathline = ref('')
 const taskDescription = ref('')
 const priority = ref('')
 const id = `${Date.now()}-${Math.random()}`
-const addTaskhandle = (e) => {
+const addTaskhandle = async (e) => {
     e.preventDefault()
     tasksStore.addTask(taskName.value, deathline.value, taskDescription.value, priority.value, id)
+
+// aqui poner lo de guardar una task en el store despeus de haberlo probado aqui
+    try {
+        console.log('token del store pero en el form', authStore.token)
+        const res = await api.post(
+  '/tasks',
+  {
+    taskName: taskName.value,
+    deathline: deathline.value,
+    priority: priority.value,
+    taskDescription: taskDescription.value
+  },
+  {
+    headers: {
+      'Authorization': 'Bearer ' + authStore.token
+    }
+  }
+);
+            console.log('res------', res.data)
+    } catch (error) {
+        console.log(error)
+    }
+
+
 }
 </script>
 

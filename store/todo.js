@@ -19,7 +19,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
             tasks.push({
                 taskName: taskName,
                 deathline: deathline,
-                taskDescription: priority,
+                taskDescription: taskDescription,
                 priority: priority,
                 id: id
             })
