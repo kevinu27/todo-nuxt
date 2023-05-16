@@ -6,6 +6,7 @@
             <div class="right-buttons">
                 <div class="menu-item" to="/auth" @click="authModal">Login</div> 
                 <NuxtLink class="menu-item" to="/auth">section</NuxtLink> 
+                {{ authStore.token }}
                 <!-- <a>df</a>
                     <a>df</a> -->
                     
@@ -50,63 +51,78 @@ const authModal = (e) => {
 
 }
 
+
 const loginHandler = async (e) => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
-    e.preventDefault
+//     e.preventDefault
     console.log("login apretado")
-    axios.post('http://localhost:5000/api/v1/login',     {
-    email: "kevin2@prueba.com",
-    password: "123123"
-    })
-    .then(res => {
-        console.log('res----', res)
-        token.value = res.data.token
-        authStore.setAuthToken(res.data.token)
-        expiresIn.value = res.data.expiresIn
-
-        const cookie = {
-            token: res.data.token,
-            expiresIn: res.data.expiresIn
-        };
-        
-        // const encodedCookie = encodeURIComponent(JSON.stringify(cookie));
-        // document.cookie = `refreshToken=${encodedCookie}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-        document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+    authStore.loginHandler(false)
+//     axios.post('http://localhost:5000/api/v1/login',     {
+//     email: "kevin2@prueba.com",
+//     password: "123123"
+//     })
+//     .then(res => {
+//         console.log('res----', res)
+//         token.value = res.data.token
+//         authStore.setAuthToken(res.data.token)
+//         expiresIn.value = res.data.expiresIn
+//         setTime()
+//         // const encodedCookie = encodeURIComponent(JSON.stringify(cookie));
+//         // document.cookie = `refreshToken=${encodedCookie}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+//         //poner una fecha de expiracion valida a la cookie, lo de los 15 minutos
+//         document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
 
 
-    }).catch(e => console.log(e))
-    // lo mismo pero haciendo con el try and catch y el async await
-    // try {
-    //    const res = await axios.post('http://localhost:5000/api/v1/login', {
-    //         email: "kevin2@prueba.com",
-    //         password: "123123"
-    //     })
-    //     console.log('res----', res.data)
-    // } catch(error) {
-    //     console.log(error)
+//     }).catch(e => console.log(e))
+//     // lo mismo pero haciendo con el try and catch y el async await
+//     // try {
+//     //    const res = await axios.post('http://localhost:5000/api/v1/login', {
+//     //         email: "kevin2@prueba.com",
+//     //         password: "123123"
+//     //     })
+//     //     console.log('res----', res.data)
+//     // } catch(error) {
+//     //     console.log(error)
   
-    // }
+//     // }
 
 
 
-    // https://universal-backend.onrender.com/api/v1/login
-//     {
-//     "email": "kevin2@prueba.com",
-//     "password": "123123"
+//     // https://universal-backend.onrender.com/api/v1/login
+// //     {
+// //     "email": "kevin2@prueba.com",
+// //     "password": "123123"
+// // }
+
+}
+
+// // esto poerlo en otr pagina mas principal quizas
+
+
+// const setTime = () => {
+//     setTimeout(()=> {
+//         refreshToken()
+//         // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+//     }, expiresIn.value * 1000-6000) // * 1000-6000 es pasar a milisegundos y despues restarle 6 segundos
+
 // }
 
-}
+// const refreshToken = async() => {
+//     try { 
+//         const res = await api.get('/refresh')
+//         console.log('refresh Token', res.data)
+//         token.value = res.data.token
+//         expiresIn.value = res.data.expiresIn
+//         // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+//         console.log('la cookie----', res.data.refresToken)
+//         document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+//         // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/; HttpOnly; SameSite=strict; Secure`;
 
-const refreshToken = async() => {
-    try { 
-        const res = await api.get('/refresh')
-        console.log('refresh Token', res.data)
-        token.value = res.data.token
-        expiresIn.value = res.data.expiresIn
-    } catch (error) {
-        console.log('refreshToken error', error)
-    }
-}
-refreshToken()
+//         setTime()
+//     } catch (error) {
+//         console.log('refreshToken error', error)
+//     }
+// }
+// refreshToken()
 </script>
 
 <style scoped>
