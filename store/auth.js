@@ -89,7 +89,7 @@ const api = axios.create({
                 document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
                 // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/; HttpOnly; SameSite=strict; Secure`;
         
-                setTime()
+                this.setTime()
             } catch (error) {
                 console.log('refreshToken error', error)
             }

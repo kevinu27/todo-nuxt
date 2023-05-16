@@ -122,7 +122,7 @@ const loginHandler = async (e) => { // el async solo hace falta si usas el segun
 //         console.log('refreshToken error', error)
 //     }
 // }
-// refreshToken()
+authStore.refreshToken()
 </script>
 
 <style scoped>
