@@ -7,8 +7,8 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
     
     state: () => ({
         authModal: false,
-        token: "TokenGlobal",
-        expiresIn:""
+        token: null,
+        expiresIn:null
     }),
 
     actions: {
@@ -20,8 +20,7 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
             console.log('el toke en el authstore: ', token)
             this.token = token
         },
-        async loginHandler (e) { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
-            e.preventDefault
+        async loginHandler () { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
             console.log("login apretado")
             axios.post('http://localhost:5000/api/v1/login',     {
             email: "kevin2@prueba.com",
@@ -32,7 +31,7 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
                 this.token = res.data.token
                 this.setAuthToken(res.data.token)
                 this.expiresIn = res.data.expiresIn
-                setTime()
+                this.setTime()
                 // const encodedCookie = encodeURIComponent(JSON.stringify(cookie));
                 // document.cookie = `refreshToken=${encodedCookie}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
                 //poner una fecha de expiracion valida a la cookie, lo de los 15 minutos
@@ -74,11 +73,11 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
         },
         
        async refreshToken() {
-// import api from '.nuxt/boot/axios.js'
-const api = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
-  withCredentials: true
-});
+            // esto del axis exportarlo de un helper o de un composable o lo que sea
+            const api = axios.create({
+            baseURL: 'http://localhost:5000/api/v1',
+            withCredentials: true
+            });
             try { 
                 const res = await api.get('/refresh')
                 console.log('refresh Token', res.data)
@@ -93,7 +92,26 @@ const api = axios.create({
             } catch (error) {
                 console.log('refreshToken error', error)
             }
-        }
+        },
+        async logout(){
+
+            const api = axios.create({
+            baseURL: 'http://localhost:5000/api/v1',
+            withCredentials: true
+            });
+
+            try { 
+                await api.get('/logout')
+                console.log('logging out')
+
+            } catch(error) {
+                console.log(error)
+            }
+            finally {
+                this.token = null,
+                this.expiresIn = null
+            }
+        },
     }
 
 })

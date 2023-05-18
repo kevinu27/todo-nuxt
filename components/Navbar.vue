@@ -5,6 +5,7 @@
             <NuxtLink to="/" class="logo"><p>TO-DO List</p></NuxtLink> 
             <div class="right-buttons">
                 <div class="menu-item" to="/auth" @click="authModal">Login</div> 
+                <div class="menu-item" to="/auth" @click="logout">Logout</div> 
                 <NuxtLink class="menu-item" to="/auth">section</NuxtLink> 
                 {{ authStore.token }}
                 <!-- <a>df</a>
@@ -51,11 +52,14 @@ const authModal = (e) => {
 
 }
 
+const logout = (e) => { // 
+    authStore.logout()
+}
 
-const loginHandler = async (e) => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
+const loginHandler = (e) => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
 //     e.preventDefault
     console.log("login apretado")
-    authStore.loginHandler(false)
+    authStore.loginHandler()
 //     axios.post('http://localhost:5000/api/v1/login',     {
 //     email: "kevin2@prueba.com",
 //     password: "123123"
