@@ -44,19 +44,30 @@ const api = axios.create({
 Router.beforeEach(async(to, from, next) => {
     console.log('to', to.fullPath)
 
-    // if(localStorage.getItem('user')=== true){
-        console.log('el localstorage user es igual a true')
-        // if(!authStore.token){
-            // authStore.refreshToken()
-        // }
-        if( to.fullPath === "/protected" && !authStore.token){
-        console.log('entro al protected sin token')
-        return next('/')
+        if(authStore.token){
+        return next()
         }
-        console.log('despues de entrar al protected')
+        if(to.fullPath === "/protected" || localStorage.getItem('user') === "true"){
+           authStore.refreshToken()
+           if(authStore.token){
+                return next()
+           }
+           return next('/')
+        }
+// lo mismo que el codigo anterior, otra forma de hacerlo
+    // // if(localStorage.getItem('user')=== true){
+    //     console.log('el localstorage user es igual a true')
+    //     // if(!authStore.token){
+    //         // authStore.refreshToken()
+    //     // }
+    //     if( to.fullPath === "/protected" && !authStore.token){
+    //     console.log('entro al protected sin token')
+    //     return next('/')
+    //     }
+    //     console.log('despues de entrar al protected')
     
-        next()
-    // }
+    //     return next()
+    // // }
 
 })
 
