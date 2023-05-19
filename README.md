@@ -7,3 +7,4 @@ Nuxt To Do List
 <li> poner la fecha de la cookie que segun el expiresIn </li>
 <li> mirar por que me hace la llamada al refresh token cada vez que recargo  </li>
 <li> cambiar los localstorage user a false por remove localstorage asi no hace falta pregutnar si es una string o un booleano el true </li>
+<li> poner un regex para verificar que el usuario y la contraseña cumplen un minimo  </li>

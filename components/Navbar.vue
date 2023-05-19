@@ -18,15 +18,14 @@
                 </p>
     <AuthModal>
         <h1>Signup</h1>
-        <h3>name</h3>
-        <input type="text" />
         <h3>email</h3>
-        <input type="email" />
+        <input type="email" v-model="email"/>
         <h3>password</h3>
-        <input type="password" />
+        <input type="password" v-model="password"/>
         <div><p>Authenticating...</p></div>
         <br />
         <button class="loginButton" @click="loginHandler">Signup</button>
+        <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>
     </AuthModal>
 </div>
 </template>
@@ -34,6 +33,8 @@
 <script setup>
 import { useAuthStore } from '~/store/auth';
 import axios from 'axios'
+const email = ref('');
+const password = ref('');
 const Router = useRouter();
 // import api from '.nuxt/boot/axios.js'
 const api = axios.create({
@@ -54,31 +55,17 @@ Router.beforeEach(async(to, from, next) => {
            }
            return next('/')
         }
-// lo mismo que el codigo anterior, otra forma de hacerlo
-    // // if(localStorage.getItem('user')=== true){
-    //     console.log('el localstorage user es igual a true')
-    //     // if(!authStore.token){
-    //         // authStore.refreshToken()
-    //     // }
-    //     if( to.fullPath === "/protected" && !authStore.token){
-    //     console.log('entro al protected sin token')
-    //     return next('/')
-    //     }
-    //     console.log('despues de entrar al protected')
-    
-    //     return next()
-    // // }
 
 })
 
 const authStore = useAuthStore()
-// const authModal = ref(false)
 const token = ref('')
 const expiresIn = ref ('')
 
 const authModal = (e) => {
     console.log("login clicked")
     authStore.setAuthModal(true)
+    
 }
   const closeModal = (e) => {
     console.log("closing clicked")
@@ -90,11 +77,17 @@ const logout = (e) => { //
     authStore.logout()
 }
 
-const loginHandler = (e) => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
-//     e.preventDefault
+const loginHandler = () => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
     console.log("login apretado")
-    authStore.loginHandler()
+    authStore.loginHandler( email.value,  password.value)
+    console.log('email and password', email.value,  password.value)
+    email.value = '';
+    password.value = '';
 
+}
+const changeToRegister = () => { 
+
+console.log('register')
 }
 
 
@@ -147,5 +140,9 @@ if (process.client) {
 }
 .right-buttons{
     display: flex;
+}
+
+.register-link{
+    color: blue
 }
 </style>>
