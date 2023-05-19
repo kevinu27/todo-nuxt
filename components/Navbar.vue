@@ -4,15 +4,18 @@
         <div class="nav-bar" >
             <NuxtLink to="/" class="logo"><p>TO-DO List</p></NuxtLink> 
             <div class="right-buttons">
-                <div class="menu-item" to="/auth" @click="authModal">Login</div> 
-                <div class="menu-item" to="/auth" @click="logout">Logout</div> 
-                <NuxtLink class="menu-item" to="/auth">section</NuxtLink> 
-                {{ authStore.token }}
+                <div class="menu-item" to="/auth" @click="authModal" v-if="!authStore.token">Login</div> 
+                <div class="menu-item" to="/auth" @click="logout" v-if="authStore.token">Logout</div> 
+                <NuxtLink class="menu-item" to="/protected" v-if="authStore.token">section protected</NuxtLink> 
+      
                 <!-- <a>df</a>
                     <a>df</a> -->
                     
                 </div>
             </div>
+            <p> 
+                    {{ authStore.token }}
+                </p>
     <AuthModal>
         <h1>Signup</h1>
         <h3>name</h3>
@@ -31,11 +34,17 @@
 <script setup>
 import { useAuthStore } from '~/store/auth';
 import axios from 'axios'
+const Router = useRouter();
 // import api from '.nuxt/boot/axios.js'
 const api = axios.create({
   baseURL: 'http://localhost:5000/api/v1',
   withCredentials: true
 });
+
+Router.beforeEach((to, from, next) => {
+    console.log('to', to)
+    next()
+})
 
 const authStore = useAuthStore()
 // const authModal = ref(false)
