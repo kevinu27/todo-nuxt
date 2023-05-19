@@ -40,10 +40,24 @@ const api = axios.create({
   baseURL: 'http://localhost:5000/api/v1',
   withCredentials: true
 });
+// esto quizas ponerlo en app.vue
+Router.beforeEach(async(to, from, next) => {
+    console.log('to', to.fullPath)
 
-Router.beforeEach((to, from, next) => {
-    console.log('to', to)
-    next()
+    // if(localStorage.getItem('user')=== true){
+        console.log('el localstorage user es igual a true')
+        // if(!authStore.token){
+            // authStore.refreshToken()
+        // }
+        if( to.fullPath === "/protected" && !authStore.token){
+        console.log('entro al protected sin token')
+        return next('/')
+        }
+        console.log('despues de entrar al protected')
+    
+        next()
+    // }
+
 })
 
 const authStore = useAuthStore()
@@ -69,73 +83,26 @@ const loginHandler = (e) => { // el async solo hace falta si usas el segundo met
 //     e.preventDefault
     console.log("login apretado")
     authStore.loginHandler()
-//     axios.post('http://localhost:5000/api/v1/login',     {
-//     email: "kevin2@prueba.com",
-//     password: "123123"
-//     })
-//     .then(res => {
-//         console.log('res----', res)
-//         token.value = res.data.token
-//         authStore.setAuthToken(res.data.token)
-//         expiresIn.value = res.data.expiresIn
-//         setTime()
-//         // const encodedCookie = encodeURIComponent(JSON.stringify(cookie));
-//         // document.cookie = `refreshToken=${encodedCookie}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-//         //poner una fecha de expiracion valida a la cookie, lo de los 15 minutos
-//         document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-
-
-//     }).catch(e => console.log(e))
-//     // lo mismo pero haciendo con el try and catch y el async await
-//     // try {
-//     //    const res = await axios.post('http://localhost:5000/api/v1/login', {
-//     //         email: "kevin2@prueba.com",
-//     //         password: "123123"
-//     //     })
-//     //     console.log('res----', res.data)
-//     // } catch(error) {
-//     //     console.log(error)
-  
-//     // }
-
-
-
-//     // https://universal-backend.onrender.com/api/v1/login
-// //     {
-// //     "email": "kevin2@prueba.com",
-// //     "password": "123123"
-// // }
 
 }
 
-// // esto poerlo en otr pagina mas principal quizas
 
+if (process.client) {
+  // Code that requires localStorage
+  console.log('process.client')
 
-// const setTime = () => {
-//     setTimeout(()=> {
-//         refreshToken()
-//         // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-//     }, expiresIn.value * 1000-6000) // * 1000-6000 es pasar a milisegundos y despues restarle 6 segundos
+  if (typeof localStorage !== 'undefined') {
+  console.log('typeof localStorage !== undefined')
+  console.log('localStorage.getItem(user)------', typeof localStorage.getItem('user'))
 
-// }
+    // Access localStorage here
+    if(localStorage.getItem('user') === "true"){
+    console.log('miro el local storage y da true a user')
+    authStore.refreshToken()
+}
+  }
+}
 
-// const refreshToken = async() => {
-//     try { 
-//         const res = await api.get('/refresh')
-//         console.log('refresh Token', res.data)
-//         token.value = res.data.token
-//         expiresIn.value = res.data.expiresIn
-//         // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-//         console.log('la cookie----', res.data.refresToken)
-//         document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
-//         // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/; HttpOnly; SameSite=strict; Secure`;
-
-//         setTime()
-//     } catch (error) {
-//         console.log('refreshToken error', error)
-//     }
-// }
-authStore.refreshToken()
 </script>
 
 <style scoped>

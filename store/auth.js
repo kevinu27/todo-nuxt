@@ -32,10 +32,11 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
                 this.setAuthToken(res.data.token)
                 this.expiresIn = res.data.expiresIn
                 this.setTime()
+                localStorage.setItem('user', true)
                 // const encodedCookie = encodeURIComponent(JSON.stringify(cookie));
                 // document.cookie = `refreshToken=${encodedCookie}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
                 //poner una fecha de expiracion valida a la cookie, lo de los 15 minutos
-                document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/;`;
         
         
             }).catch(e => console.log(e))
@@ -85,12 +86,15 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
                 this.expiresIn = res.data.expiresIn
                 // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
                 console.log('la cookie----', res.data.refresToken)
-                document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
+                //  document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/; HttpOnly`;
                 // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/; HttpOnly; SameSite=strict; Secure`;
-        
+                localStorage.setItem('user', true)
+                
                 this.setTime()
             } catch (error) {
                 console.log('refreshToken error', error)
+                localStorage.setItem('user', false)
+
             }
         },
         async logout(){
@@ -103,6 +107,8 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
             try { 
                 await api.get('/logout')
                 console.log('logging out')
+                localStorage.setItem('user', false)
+
 
             } catch(error) {
                 console.log(error)
