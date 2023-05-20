@@ -1,22 +1,12 @@
 <template>
     <div> 
 
-        <div class="modal-overlay" v-if="authStore.authModal"></div>
-        <div class="modal" v-if="authStore.authModal">
+        <div class="modal-overlay" v-if="authStore.loginModal || authStore.registerModal"></div>
+        <div class="modal" v-if="authStore.loginModal || authStore.registerModal">
             <div class="closingX" @click="closeModal">
                 <h1>X</h1>
             </div>
             <slot />
-            <!-- <h1>Signup</h1>
-            <h3>name</h3>
-            <input type="text" />
-            <h3>email</h3>
-            <input type="email" />
-            <h3>password</h3>
-            <input type="password" />
-            <div><p>Authenticating...</p></div>
-            <br />
-            <button class="loginButton">Signup</button> -->
         </div>
         
     </div>
@@ -27,13 +17,36 @@ import { useAuthStore } from "~/store/auth";
 const authStore = useAuthStore();
 const closeModal = (e) => {
   console.log("closing clicked")
-  authStore.setAuthModal(false)
+  authStore.setAuthModalLogin(false)
+  authStore.setAuthModalRegister(false)
 
 
 }
 </script>
 
 <style>
+input {
+  height: 2rem;
+  width: 70%;
+}
+.loginButton {
+  margin-top: 2rem;
+  width: 40%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: 3px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+}
+h1 {
+  margin-top: 0px;
+}
+.closingX {
+  width: 90%;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: end;
+  padding: 0px;
+}
 .modal-overlay {
   position: absolute;
   top: 0;

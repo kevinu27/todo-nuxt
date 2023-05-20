@@ -4,7 +4,7 @@
         <div class="nav-bar" >
             <NuxtLink to="/" class="logo"><p>TO-DO List</p></NuxtLink> 
             <div class="right-buttons">
-                <div class="menu-item" to="/auth" @click="authModal" v-if="!authStore.token">Login</div> 
+                <div class="menu-item" to="/auth" @click="loginModal" v-if="!authStore.token">Login</div> 
                 <div class="menu-item" to="/auth" @click="logout" v-if="authStore.token">Logout</div> 
                 <NuxtLink class="menu-item" to="/protected" v-if="authStore.token">section protected</NuxtLink> 
       
@@ -16,8 +16,8 @@
             <p> 
                     {{ authStore.token }}
                 </p>
-    <AuthModal>
-        <h1>Signup</h1>
+    <AuthModal v-if="authStore.loginModal">
+        <h1>Login</h1>
         <h3>email</h3>
         <input type="email" v-model="email"/>
         <h3>password</h3>
@@ -25,6 +25,17 @@
         <div><p>Authenticating...</p></div>
         <br />
         <button class="loginButton" @click="loginHandler">Signup</button>
+        <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>
+    </AuthModal>
+    <AuthModal v-if="authStore.registerModal">
+        <h1>Signup</h1>
+        <h3>email</h3>
+        <input type="email" v-model="email"/>
+        <h3>password</h3>
+        <input type="password" v-model="password"/>
+        <!-- <div><p>Authenticating...</p></div> -->
+        <br />
+        <button class="loginButton" @click="registerHandler">Signup</button>
         <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>
     </AuthModal>
 </div>
@@ -62,19 +73,39 @@ const authStore = useAuthStore()
 const token = ref('')
 const expiresIn = ref ('')
 
-const authModal = (e) => {
+const loginModal = () => {
     console.log("login clicked")
-    authStore.setAuthModal(true)
+    authStore.setAuthModalLogin(true)
+    authStore.setAuthModalRegister(false)
     
 }
-  const closeModal = (e) => {
+  const closeModal = () => {
     console.log("closing clicked")
-    authStore.setAuthModal(false)
+    authStore.setAuthModalLogin(false)
+    authStore.setAuthModalRegister(false)
+
+
+}
+const changeToRegister = () => { 
+
+console.log('register')
+authStore.setAuthModalRegister(true)
+authStore.setAuthModalLogin(false)
 
 }
 
 const logout = (e) => { // 
     authStore.logout()
+}
+
+
+const registerHandler = () => { 
+    console.log("login apretado")
+    authStore.registerHandler( email.value,  password.value)
+    console.log('email and password', email.value,  password.value)
+    email.value = '';
+    password.value = '';
+
 }
 
 const loginHandler = () => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
@@ -84,10 +115,6 @@ const loginHandler = () => { // el async solo hace falta si usas el segundo meto
     email.value = '';
     password.value = '';
 
-}
-const changeToRegister = () => { 
-
-console.log('register')
 }
 
 
