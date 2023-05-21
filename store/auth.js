@@ -95,6 +95,7 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
                 const res = await api.get('/refresh')
                 console.log('refresh Token', res.data)
                 this.token = res.data.token
+                console.log('token en el refresh', this.token)
                 this.expiresIn = res.data.expiresIn
                 // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
                 console.log('la cookie----', res.data.refresToken)
