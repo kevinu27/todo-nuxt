@@ -7,6 +7,7 @@
                 <div class="menu-item" to="/auth" @click="loginModal" v-if="!authStore.token">Login</div> 
                 <div class="menu-item" to="/auth" @click="logout" v-if="authStore.token">Logout</div> 
                 <NuxtLink class="menu-item" to="/protected" v-if="authStore.token">section protected</NuxtLink> 
+                <NuxtLink class="menu-item" v-if="authStore.token" @click="tokenConsole" >console del token</NuxtLink> 
       
                 <!-- <a>df</a>
                     <a>df</a> -->
@@ -54,7 +55,7 @@ const api = axios.create({
 });
 // esto quizas ponerlo en app.vue
 Router.beforeEach(async(to, from, next) => {
-    console.log('to', to.fullPath)
+    // console.log('to', to.fullPath)
 
         if(authStore.token){
         return next()
@@ -73,6 +74,13 @@ const authStore = useAuthStore()
 const token = ref('')
 const expiresIn = ref ('')
 
+
+
+const tokenConsole = () => {
+    console.log("console del token es: ", authStore.token)
+
+    
+}
 const loginModal = () => {
     console.log("login clicked")
     authStore.setAuthModalLogin(true)

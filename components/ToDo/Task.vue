@@ -28,9 +28,12 @@ taskData.value =  props.task
 })
 
 const removeTask = () => {
-    console.log('--------- props.task.id', props.task.id)
-    tasksStore.removeTasksFromStorage(props.task.id)
+    console.log('--------- props.task.id', props.task._id)
+    // tasksStore.removeTasksFromStorage(props.task.id)
+    tasksStore.removeTasks(props.task._id)
 }
+
+// console.log('props', props.task._id)
 </script>
 
 

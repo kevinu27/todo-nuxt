@@ -10,36 +10,78 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
 
     actions: {
         async setTasksFromStorage() {
-            const authStore = useAuthStore();
-            const tasks = await JSON.parse(localStorage.getItem("tasks"));
-            this.tasks = tasks
-            // const isLoggedIn = authStore.isLoggedIn;
-            const token = authStore.token;
-            console.log('---------token', token)
-        },
-        async removeTasksFromStorage(taskId) {
-            this.tasks =  this.tasks.filter(task => task.id !== taskId)
-            localStorage.setItem("tasks", JSON.stringify(  this.tasks));
-        },
-        async addTask(taskName, deathline, taskDescription, priority, id) {
+            console.log('empieza el coger las tasks del store y de la llamada')
             const api = axios.create({
                 baseURL: "http://localhost:5000/api/v1",
                 withCredentials: true
               });
               const authStore = useAuthStore();
+            //   await authStore.$state.token;
             const token = authStore.token;
-            console.log("token que parece que no funciona----!!!!---", useAuthStore)
-            // const tasks = JSON.parse(localStorage.getItem("tasks"));
-            // tasks.push({
-            //     taskName: taskName,
-            //     deathline: deathline,
-            //     taskDescription: taskDescription,
-            //     priority: priority,
-            //     id: id
-            // })
-            // console.log('tasks localStorage', tasks)
-            // localStorage.setItem("tasks", JSON.stringify(tasks));
-            // this.tasks = tasks
+              console.log('token del list en el authstore', token)
+              try {
+                console.log('token del store pero en el form', token)
+                const res = await api.get(
+                    '/tasks',
+
+
+          {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            }
+          }
+        );
+                    console.log('res------',  res.data)
+                    this.tasks = res.data.tasks
+            } catch (error) {
+                console.log(error)
+            }
+
+
+            
+        },
+        async removeTasks(taskId) {
+            console.log('taskId', taskId)
+            const api = axios.create({
+                baseURL: "http://localhost:5000/api/v1",
+                withCredentials: true
+              });
+            const authStore = useAuthStore();
+            const token = authStore.token;
+            
+            try {
+                console.log('token del store pero en el form', token)
+                const res = await api.delete(
+            `/tasks/${taskId}`,
+            {
+            id: taskId
+           },
+           {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+            params: {
+                id: taskId
+              }
+          }
+        );
+                    console.log('res------', res)
+            } catch (error) {
+                console.log(error)
+            }
+// cambiar el this.setTasksFromStorage() for un si la respeusta de la llamada al delete da 200 entonces 
+//elimino del state esa task, asi me ahorro una llamada y puedo hacer una transicion de que se va esa task
+            this.setTasksFromStorage()
+        },
+
+        async addTask(taskName, deathline, taskDescription, priority) {
+            const api = axios.create({
+                baseURL: "http://localhost:5000/api/v1",
+                withCredentials: true
+              });
+            const authStore = useAuthStore();
+            const token = authStore.token;
+
             try {
                 console.log('token del store pero en el form', token)
                 const res = await api.post(

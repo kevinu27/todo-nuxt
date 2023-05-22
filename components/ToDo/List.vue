@@ -1,8 +1,9 @@
 <template>
     <div class="list">
+        <h1 @click="cargarLista">cargar lista</h1>
         <div class="task-container"
             v-for="task in tasksStore.tasks"
-            :key="task.id"
+            :key="task._id"
         >
         <ToDoTask :task="task" @removeTask="removeTask"/>    
     </div>
@@ -14,9 +15,13 @@
 const tasks = ref()
 import { useTodoStore } from '~/store/todo';
 const tasksStore = useTodoStore()
-tasksStore.setTasksFromStorage()
 // tasksStore.getTasks()
 // tasks.value = tasksStore.getTasks()
+const cargarLista = () => {
+    
+    tasksStore.setTasksFromStorage()
+}
+
 
 onMounted(() => {
     console.log("Component onMounted");

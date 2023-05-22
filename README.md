@@ -9,3 +9,7 @@ Nuxt To Do List
 <li> cambiar los localstorage user a false por remove localstorage asi no hace falta pregutnar si es una string o un booleano el true </li>
 <li> poner un regex para verificar que el usuario y la contraseña cumplen un minimo  </li>
 <li> css de los modal de auth login y register  </li>
+<li> limpieza en el store  del todo </li>
+<li>poner un rollo spinner que solo cuando cambie el token a otra cosa si la llamada no da 400, que entonces haga la llamada de la lista al cargar la pagina, para que no sea haciendo click en cargar tasks </li>
+<li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
+<li>poner algo que antes añadir una tarea si un campo esta vacio ponerle en rojo los inputs o algo que indique que falta o que hay un error </li>
