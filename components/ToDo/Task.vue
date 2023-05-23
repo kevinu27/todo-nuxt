@@ -1,6 +1,6 @@
 <template>
-    <div class="task">
-        <div class="closing"  @click="removeTask" ><p>+ </p></div>
+   <NuxtLink :to="`/task/${props.task._id}`" style="text-decoration: none; color: inherit;"> <div class="task" >
+        <div class="closing"  ><p  @click="removeTask">+ </p></div>
         <h1>
             {{ props.task.taskName }}
         </h1>
@@ -11,11 +11,13 @@
             Deathline: {{ props.task.deathline }}
         </p>
     </div>
+</NuxtLink>
 </template>
 
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
+
 const tasksStore = useTodoStore()
 
 const props = defineProps({
@@ -39,6 +41,7 @@ const removeTask = () => {
 
 <style scoped>
 .task {
+    text-decoration: none;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -52,6 +55,8 @@ const removeTask = () => {
 
 }
 .task p{
+    text-decoration: none;
+
     margin: 0;
     margin-bottom: 1rem;
 }

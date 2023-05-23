@@ -13,3 +13,4 @@ Nuxt To Do List
 <li>poner un rollo spinner que solo cuando cambie el token a otra cosa si la llamada no da 400, que entonces haga la llamada de la lista al cargar la pagina, para que no sea haciendo click en cargar tasks </li>
 <li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
 <li>poner algo que antes añadir una tarea si un campo esta vacio ponerle en rojo los inputs o algo que indique que falta o que hay un error </li>
+<li>poner un if que si el tasks state tiene algo dentro qu eno haga la llamada para ahorrar llamadas a la base de datos </li>

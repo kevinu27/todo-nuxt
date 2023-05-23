@@ -105,7 +105,14 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         
         
 
-        }
+        },
+        async taskDetail(taskId) {
+        
+
+      
+      
+
+      },
     }
 
 })
