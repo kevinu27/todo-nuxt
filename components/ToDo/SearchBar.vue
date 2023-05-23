@@ -3,14 +3,14 @@
         <!-- <p>Search Bar</p> -->
         <form action="" class="form">
             <input type="text" id="fname" name="task" placeholder="search a tasks..." class="input">
-            <button class="button">Search</button>
+            <button class="button-searchBar">Search</button>
         </form>
     </div>
 </template>
 
 <style scoped>
 
-.button{
+.button-searchBar{
     background-color: #007bff;
     border: none;
     box-shadow: none;
@@ -24,6 +24,7 @@
     width: 70%;
     border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
+  height: 3rem;
 }
 input::placeholder {
   /* color: red; */
@@ -38,6 +39,7 @@ input::placeholder {
     width: 100%;
     display: flex;
     justify-content: center;
+    height: 100%;
 }
 .search-bar{
     width: 100%;

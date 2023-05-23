@@ -52,11 +52,11 @@ const removeTask = () => {
     border-radius: 1rem;
     box-shadow: 5px 5px 5px rgba(30, 30, 30, 0.3);
     padding-bottom: 2rem;
+    text-align: center;
 
 }
 .task p{
     text-decoration: none;
-
     margin: 0;
     margin-bottom: 1rem;
 }
