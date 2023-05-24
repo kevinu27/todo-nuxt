@@ -106,13 +106,38 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         
 
         },
-        async taskDetail(taskId) {
-        
 
+        async addSubtask(subtaskId, subtaskDescription) {
+          console.log('addSubtask en el todo store')
+          const api = axios.create({
+              baseURL: "http://localhost:5000/api/v1",
+              withCredentials: true
+            });
+          const authStore = useAuthStore();
+          const token = authStore.token;
+
+          try {
+              console.log('token del store pero en el form', token)
+              const res = await api.post(
+        '/subtasks',
+        {
+          tid: subtaskId,
+          subtaskDescription: subtaskDescription
+        },
+        {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        }
+      );
+                  console.log('res------', res.data)
+          } catch (error) {
+              console.log(error)
+          }
       
       
 
-      },
+      }
     }
 
 })

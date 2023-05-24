@@ -20,27 +20,12 @@
             {{subtasksForm}}
 
             <form class="form" v-if="subtasksForm">
-            <div class="input-line"> 
-                <label class="label-class"> subTask title</label>
-                <input type="text" id="fname" name="task" placeholder="type a new task" class="" v-model="taskName">
-            </div>
-            <div class="input-line"> 
-                <label class="label-class">deathline</label>
-                <input type="date" id="fname" name="task"  class="" v-model="deathline">
-            </div>
+ 
             <div class="input-line"> 
                 <label class="label-class">description</label>
-                <input type="text" id="fname" name="task" placeholder="type the description of the task" class="" v-model="taskDescription">
+                <input type="text" id="fname" name="task" placeholder="type the description of the task" class="" v-model="subtaskDescription">
             </div>
-            <div class="input-line"> 
-                <label class="label-class">priority</label>
-                <select v-model="priority" class="">
-                    <option value="">Priority</option>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium </option>
-                    <option value="Low">Low</option>
-                </select>
-            </div>
+     
             <button class="button" @click="addsubTaskhandle">Add subtask</button>
         </form>
             
@@ -60,6 +45,8 @@ import { useTodoStore } from '~/store/todo';
 // import { useAuthStore } from '~/store/auth';
 import { useRoute } from 'vue-router'
 const subtasksForm = ref(false)
+const subtaskDescription = ref('')
+
 const route = useRoute()
 
 const tasksStore = useTodoStore()
@@ -74,6 +61,8 @@ const closeSubtaskForm = () => {
 const addsubTaskhandle = (e) => {
     e.preventDefault()
    console.log('aqui hago peticion de crear subtask')
+    //llamada la funcion en el action y e le pasan los valores y el 
+    tasksStore.addSubtask(taskDetails._id, subtaskDescription.value)
 }
 
 
