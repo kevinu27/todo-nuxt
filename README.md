@@ -18,3 +18,4 @@ Nuxt To Do List
 <li>Hacer que al eliminar no me vaya a detalles de la tarea</li>
 <li>poner lo de las graficas con lo experado y lo conseguido </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
+<li> poner el tipo de tarea: diario, meta vital o cosas asi, para filtrarlas</li>
