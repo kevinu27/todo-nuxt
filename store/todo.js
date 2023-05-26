@@ -40,50 +40,39 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
 
 
             
-        }, async setSubtasks(taskIds) {
+        }, 
+        async setSubtasks(taskIds) {
           console.log('Subtasks, taskIds', taskIds)
           const api = axios.create({
               baseURL: "http://localhost:5000/api/v1",
               withCredentials: true
-            });
-            const authStore = useAuthStore();
+          });
+          const authStore = useAuthStore();
           //   await authStore.$state.token;
           const token = authStore.token;
-            console.log('token del list en el authstore', token)
-            try {
-              console.log('token del store pero en el form', token)
-              const res = await api.get(
-                  '/subtasks',
+          try {
+            const res = await api.get('/subtasks',
+              {
+                headers: {
+                  'Authorization': 'Bearer ' + token,
+                  'taskIds': taskIds
+                }
+              }
+            );
+            this.subtasks = res.data.subtasks
+            this.tasks = this.tasks.map((task) => {
+            task.subtasks = []; 
+            return task;
+            });
 
-
-        {
-          headers: {
-            'Authorization': 'Bearer ' + token,
-            'taskIds': taskIds
-          }
-        }
-      );
-      console.log('---------res.data del subtask---------', res.data)
-      this.subtasks = res.data.subtasks
-      console.log('---------this.subtask---------', this.subtasks[0])
-
-        this.tasks = this.tasks.map((task) => {
-          task.subtasks = []; 
-          return task;
-        });
-
-          console.log('this.task---!!!!!!++++', this.tasks )        
-          this.tasks.forEach(task => {
-                   this.subtasks.forEach(subtask => {
-                    if(task._id === subtask.tid){
-                      task.subtasks.push(subtask)
-                    }
-                  console.log('subtasks in the loop', subtask)
-                   }) 
-                  console.log('task in the loop', task)
-          })
-          console.log('a ver si funciono el task', this.tasks)
-          console.log('a ver si funciono el subtask', this.subtasks)
+            console.log('this.task---!!!!!!++++', this.tasks )        
+            this.tasks.forEach(task => {
+            this.subtasks.forEach(subtask => {
+              if(task._id === subtask.tid){
+                task.subtasks.push(subtask)
+                }
+              }) 
+            })
           } catch (error) {
               console.log(error)
           }

@@ -1,7 +1,6 @@
 <template>
     <div class="taskDetail">
 
-        <!-- <h1>Task Detail</h1> -->
         <div class="taskDetailCard">
         <div>
             {{ taskDetails.taskName }}
@@ -15,22 +14,29 @@
         </div>
         <div class="subtasks">
             <h2>Subtasks</h2>
-            <div class="closing-subtask-form"><span class="closingX" v-if="subtasksForm" @click="closeSubtaskForm"> +</span></div>
             <div><button class="add-subtask" @click="showSubtaskForm"> +</button></div>
-            {{subtasksForm}}
-
+            <div class="closing-subtask-form"><span class="closingX" v-if="subtasksForm" @click="closeSubtaskForm"> +</span></div>
             <form class="form" v-if="subtasksForm">
  
             <div class="input-line"> 
                 <label class="label-class">description</label>
                 <input type="text" id="fname" name="task" placeholder="type the description of the task" class="" v-model="subtaskDescription">
             </div>
-     
+
             <button class="button" @click="addsubTaskhandle">Add subtask</button>
-        </form>
+            </form>
+        
+            <div class="subtasks-card">
+                <div  v-for="subtask in taskDetails.subtasks" :key="subtask._id">
+                    <ToDoSubtask :subtask="subtask"/>
+                </div>
+
+            </div>
+          
             
-        </div>
-        <div class="card-footer">
+            </div>
+
+            <div class="card-footer">
             <div><button class="remove"> remove</button></div>
             <div class="checkbox"> <label> Mark task as completed </label><input type="checkbox" > </div>
             
@@ -138,6 +144,8 @@ margin-left: 15px;
     color: white;
     font-size: 20px;
     font-weight: 700;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 .button{
     background-color: #007bff;
@@ -150,6 +158,7 @@ margin-left: 15px;
     width: fit-content;
     color: white;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .closing-subtask-form{
@@ -177,6 +186,16 @@ width: fit-content;
 display: flex;
 justify-content: flex-end;
 
+}
+
+.subtask-container{
+width: 100%;
+}
+
+.subtasks-card{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 </style>
