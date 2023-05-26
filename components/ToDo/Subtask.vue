@@ -2,8 +2,15 @@
     <div class="subtask">
 
         <div class="subtask-card">
+            <div class="removingSubtask">
+                <p @click="removingSubtask" >+</p>
+
+            </div>
            <p>  {{props.subtask.subtaskDescription}} </p>
-           <div class="checkbox"> <label>  completed </label><input type="checkbox" v-model="completedSubtask"> </div>
+           <div class="checkbox-container">
+
+               <div class="checkbox"> <label>  completed </label><input type="checkbox" class="checkbox-checkbox" v-model="completedSubtask"> </div>
+           </div>
         </div>
         {{completedSubtask}}
     </div>
@@ -17,6 +24,13 @@ const props = defineProps({
   subtask: Object
 })
 console.log(props)
+
+const removingSubtask = () => {
+    console.log('removingSubtask', props.subtask._id)
+    tasksStore.removeSubtask(props.subtask._id)
+
+}
+
 </script>
 
 <style scoped>
@@ -30,16 +44,48 @@ console.log(props)
 }
 .subtask-card p {
 white-space: nowrap;
+margin-top: 0;
 }
 .subtask{
     margin-right: 2rem;
 }
 .checkbox{
     display: flex;
-    width: fit-content;
+    width: 100%;
     /* border: 2px solid blue; */
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
     align-items: center;
+    justify-content: flex-end;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+.checkbox-checkbox{
+margin-left: 0px;
+border: 2px solid red;
+height: 15px;
+width: 15px;
+margin-left: 10px;
+}
 
+.removingSubtask{
+/* border: 3px solid red; */
+display: flex;
+justify-content: flex-end;
+}
+.removingSubtask p{
+margin: 0;
+margin-top: 0.5rem;
+margin-right: 0.5rem;
+transform: rotate(-45deg);
+}
+.checkbox-container{
+    display: flex;
+    width: 100%;
+    /* border: 2px solid red; */
+    justify-content: flex-end;
+
+}
+label{
+    margin:0;
 }
 </style>

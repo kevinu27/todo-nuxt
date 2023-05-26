@@ -113,6 +113,38 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
 //elimino del state esa task, asi me ahorro una llamada y puedo hacer una transicion de que se va esa task
             this.setTasksFromStorage()
         },
+        async removeSubtask(subtaskId) {
+          console.log('subtaskId', subtaskId)
+          const api = axios.create({
+              baseURL: "http://localhost:5000/api/v1",
+              withCredentials: true
+            });
+          const authStore = useAuthStore();
+          const token = authStore.token;
+          
+          try {
+              console.log('token del store pero en el form', token)
+              const res = await api.delete(
+          `/subtasks/${subtaskId}`,
+          {
+          id: subtaskId
+         },
+         {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          params: {
+              id: subtaskId
+            }
+        }
+      );
+                  console.log('res------', res)
+          } catch (error) {
+              console.log(error)
+          }
+
+          // this.setTasksFromStorage() aqui poner la que llama a cargar las subtasks
+      },
 
         async addTask(taskName, deathline, taskDescription, priority) {
             const api = axios.create({
