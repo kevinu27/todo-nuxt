@@ -7,6 +7,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
     state: () => ({
         tasks: [],
         subtasks: null,
+        editTaskModal: false
     }),
 
     actions: {
@@ -146,7 +147,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
           // this.setTasksFromStorage() aqui poner la que llama a cargar las subtasks
       },
 
-        async addTask(taskName, deathline, taskDescription, priority) {
+        async addTask(taskName, deathline, taskDescription, priority, category) {
             const api = axios.create({
                 baseURL: "http://localhost:5000/api/v1",
                 withCredentials: true
@@ -162,7 +163,8 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
             taskName: taskName,
             deathline: deathline,
             priority: priority,
-            taskDescription: taskDescription
+            taskDescription: taskDescription,
+            category: category
           },
           {
             headers: {
@@ -209,7 +211,49 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
       
       
 
+      },
+      async editTasks(taskId, taskName, deathline, taskDescription, priority, category) {
+        console.log('taskId++++++++++', taskId)
+        console.log('task.taskDescription++++++++++', taskDescription)
+        
+        const api = axios.create({
+            baseURL: "http://localhost:5000/api/v1",
+            withCredentials: true
+          });
+        const authStore = useAuthStore();
+        const token = authStore.token;
+        
+        try {
+            console.log('token del store pero en el form', token)
+            const res = await api.patch(
+        `/tasks/${taskId}`,
+        {
+        taskName: taskName,
+        deathline: deathline,
+        priority: priority,
+        taskDescription: taskDescription,
+        taskStatus: 0,
+        category: category
+       },
+       {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        params: {
+            id: taskId
+          }
       }
+    );
+                console.log('res------', res)
+        } catch (error) {
+            console.log(error)
+        }
+// cambiar el this.setTasksFromStorage() for un si la respeusta de la llamada al delete da 200 entonces 
+//elimino del state esa task, asi me ahorro una llamada y puedo hacer una transicion de que se va esa task
+        // this.setTasksFromStorage()
+    },
+
+
     }
 
 })

@@ -1,5 +1,5 @@
 <template>
-    <div class="add-task-form">
+    <div >
         <form class="form2">
             <div class="input-line"> 
                 <label>Task title</label>
@@ -33,7 +33,11 @@
                     <option value="skills">skills</option>
                 </select>
             </div>
-            <button class="button" @click="addTaskhandle">Add task</button>
+            <div class="buttons">
+                <button class="button" @click="editTaskhandle">Edit task</button>
+                <button class="button cancel-editing" @click="cancelEditing">Cancel</button>
+
+            </div>
         </form>
     </div>
 </template>
@@ -49,43 +53,26 @@ const api = axios.create({
   withCredentials: true
 });
 const tasksStore = useTodoStore()
-const taskName = ref('')
-const deathline = ref('')
-const taskDescription = ref('')
-const priority = ref('')
-const category = ref('')
-const id = `${Date.now()}-${Math.random()}`
-const addTaskhandle = async (e) => {
+const taskName = ref(props.taskDetails.taskName)
+const deathline = ref(props.taskDetails.deathline)
+const taskDescription = ref(props.taskDetails.taskDescription)
+const priority = ref(props.taskDetails.priority)
+const category = ref(props.taskDetails.category)
+const taskId = ref(props.taskDetails._id)
+const props = defineProps({
+    taskDetails: Object
+})
+
+const cancelEditing = async (e) => {
     e.preventDefault()
-    // poner esto en pinia
-    console.log('token que funcionaba', authStore.token)
-    
-    tasksStore.addTask(taskName.value, deathline.value, taskDescription.value, priority.value, category.value, id)
-
-// aqui poner lo de guardar una task en el store despeus de haberlo probado aqui
-//     try {
-//         console.log('token del store pero en el form', authStore.token)
-//         const res = await api.post(
-//   '/tasks',
-//   {
-//     taskName: taskName.value,
-//     deathline: deathline.value,
-//     priority: priority.value,
-//     taskDescription: taskDescription.value
-//   },
-//   {
-//     headers: {
-//       'Authorization': 'Bearer ' + authStore.token
-//     }
-//   }
-// );
-//             console.log('res------', res.data)
-//     } catch (error) {
-//         console.log(error)
-//     }
-
-
+    tasksStore.editTaskModal = false
 }
+
+const editTaskhandle = async (e) => {
+    e.preventDefault()
+    tasksStore.editTasks(taskId.value, taskName.value, deathline.value, taskDescription.value, priority.value, category.value)
+}
+
 </script>
 
 
@@ -98,8 +85,9 @@ const addTaskhandle = async (e) => {
     font-size: 2rem;
     padding: 0.5rem 1rem;
     border-radius: 0.3rem;
-    width: 20%;
+    width: fit-content;
     color: white;
+    margin-right: 2rem;
 }
 .input{
     width: 80%;
@@ -149,4 +137,11 @@ label {
    width: 20%;
 }
 
+.buttons{
+    display: flex;
+}
+.cancel-editing {
+    background-color: #ff6f00;
+
+}
 </style>

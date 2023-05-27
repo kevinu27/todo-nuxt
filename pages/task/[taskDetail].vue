@@ -2,16 +2,22 @@
     <div class="taskDetail">
 
         <div class="taskDetailCard">
-        <div>
-            {{ taskDetails.taskName }}
-        </div>
-            
-        <div>
-            {{ taskDetails.taskDescription }}
-        </div>
-        <div>
-            {{ taskDetails.priority}}
-        </div>
+            <div v-if="!tasksStore.editTaskModal">
+                <div>
+                    {{ taskDetails.taskName }}
+                </div>
+                    
+                <div>
+                    {{ taskDetails.taskDescription }}
+                </div>
+                <div>
+                    {{ taskDetails.priority}}
+                </div>
+            </div>
+            <div v-if="tasksStore.editTaskModal">
+                    <ToDoEditForm :taskDetails="taskDetails"/>
+            </div>
+
         <div class="subtasks">
             <h2>Subtasks</h2>
             <div><button class="add-subtask" @click="showSubtaskForm"> +</button></div>
@@ -30,17 +36,15 @@
                 <div  v-for="subtask in taskDetails.subtasks" :key="subtask._id">
                     <ToDoSubtask :subtask="subtask"/>
                 </div>
-
+            </div>   
             </div>
-          
-            
-            </div>
-
             <div class="card-footer">
-            <div><button class="remove"> remove</button></div>
-            <div class="checkbox"> <label> Mark task as completed </label><input type="checkbox" > </div>
+                <div><button class="edit"  @click="editTaskhandle"> editar</button></div>
+            <div><button class="remove"  @click="removeTaskhandle"> remove</button></div>
+            <div class="checkbox"> <label> Mark task as completed </label><input type="checkbox" v-model="taskCompleted"> </div>
             
         </div>
+        <div> dfs - {{tasksStore.editTaskModal }}</div> 
     </div>
     </div>
 
@@ -52,10 +56,22 @@ import { useTodoStore } from '~/store/todo';
 import { useRoute } from 'vue-router'
 const subtasksForm = ref(false)
 const subtaskDescription = ref('')
+const taskCompleted = ref('')
+
 
 const route = useRoute()
 
 const tasksStore = useTodoStore()
+
+const editTaskhandle = () => {
+console.log('edit task')
+    tasksStore.editTaskModal = true
+}
+
+const removeTaskhandle = () => {
+    console.log('remove task')
+
+}
 const taskDetails = tasksStore.tasks.find(task => task._id === route.params.taskDetail)
 const showSubtaskForm = () => {
     subtasksForm.value = true
@@ -134,6 +150,7 @@ margin-left: 15px;
     color: white;
     font-size: 20px;
     font-weight: 700;
+    margin-left: 2rem;
 
 }
 .add-subtask{
@@ -196,6 +213,16 @@ width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+.edit{
+    background-color: rgb(0, 98, 255);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 2rem;
 }
 
 </style>

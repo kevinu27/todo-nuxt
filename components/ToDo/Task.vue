@@ -10,8 +10,11 @@
         <p>
             Deathline: {{ props.task.deathline }}
         </p>
+        <p>
+            Category: {{ props.task.category }}
+        </p>
     </div>
-</NuxtLink>
+</NuxtLink >
 </template>
 
 

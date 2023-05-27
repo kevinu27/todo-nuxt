@@ -19,3 +19,4 @@ Nuxt To Do List
 <li>poner lo de las graficas con lo experado y lo conseguido </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
 <li> poner el tipo de tarea: diario, meta vital o cosas asi, para filtrarlas</li>
+<li> iconos para eliminar y editar?</li>
