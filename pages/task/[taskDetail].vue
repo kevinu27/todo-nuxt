@@ -41,10 +41,10 @@
             <div class="card-footer">
                 <div><button class="edit"  @click="editTaskhandle"> editar</button></div>
             <div><button class="remove"  @click="removeTaskhandle"> remove</button></div>
-            <div class="checkbox"> <label> Mark task as completed </label><input type="checkbox" v-model="taskCompleted"> </div>
+            <div class="checkbox"> <label> Mark task as completed </label><input type="checkbox" v-model="taskCompleted" :checked="true"> </div>
             
         </div>
-        <div> dfs - {{tasksStore.editTaskModal }}</div> 
+        <div> taskCompletedFromTaskDetail - {{taskCompletedFromTaskDetail }}</div> 
     </div>
     </div>
 
@@ -54,14 +54,45 @@
 import { useTodoStore } from '~/store/todo';
 // import { useAuthStore } from '~/store/auth';
 import { useRoute } from 'vue-router'
+const tasksStore = useTodoStore()
 const subtasksForm = ref(false)
 const subtaskDescription = ref('')
+let taskcompleted = false
 const taskCompleted = ref('')
 
+watch(taskCompleted, async (newTask, oldTask) => {
+    console.log('newTask', newTask)
+    console.log('oldTask', oldTask)
+    if(oldTask){
+        taskcompleted = false
+    }else {
+        taskcompleted = true
+    }
+    console.log('taskDetails', taskDetails )
+    console.log('tasksStore.tasks', tasksStore.tasks )
+    console.log(' taskDetails.taskStatus****** ', taskDetails.taskStatus  )
+    tasksStore.completeTasks(taskDetails._id, taskDetails.taskName, taskDetails.deathline, taskDetails.taskDescription, taskDetails.priority, taskDetails.category, taskDetails.taskStatus, taskcompleted)
+})
 
 const route = useRoute()
+const taskDetails = tasksStore.tasks.find(task => task._id === route.params.taskDetail)
+const taskCompletedFromTaskDetail = taskDetails.taskcompleted
+if(taskDetails.taskcompleted){
+    taskCompleted.value = true
+}else {
+    taskCompleted.value = false
+} 
+console.log('taskCompletedFromTaskDetail', taskCompletedFromTaskDetail)
 
-const tasksStore = useTodoStore()
+console.log(' taskDetails****** ', taskDetails)
+
+console.log('------------',taskDetails.taskStatus)
+console.log('------------',taskDetails)
+const showSubtaskForm = () => {
+    subtasksForm.value = true
+}
+tasksStore.currentTask = taskDetails
+
 
 const editTaskhandle = () => {
 console.log('edit task')
@@ -71,10 +102,6 @@ console.log('edit task')
 const removeTaskhandle = () => {
     console.log('remove task')
 
-}
-const taskDetails = tasksStore.tasks.find(task => task._id === route.params.taskDetail)
-const showSubtaskForm = () => {
-    subtasksForm.value = true
 }
 
 const closeSubtaskForm = () => {

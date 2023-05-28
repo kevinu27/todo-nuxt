@@ -59,6 +59,8 @@ const taskDescription = ref(props.taskDetails.taskDescription)
 const priority = ref(props.taskDetails.priority)
 const category = ref(props.taskDetails.category)
 const taskId = ref(props.taskDetails._id)
+const taskStatus = ref(props.taskDetails.taskStatus)
+const taskcompleted = ref(props.taskDetails.taskcompleted)
 const props = defineProps({
     taskDetails: Object
 })
@@ -70,7 +72,7 @@ const cancelEditing = async (e) => {
 
 const editTaskhandle = async (e) => {
     e.preventDefault()
-    tasksStore.editTasks(taskId.value, taskName.value, deathline.value, taskDescription.value, priority.value, category.value)
+    tasksStore.editTasks(taskId.value, taskName.value, deathline.value, taskDescription.value, priority.value, category.value, taskStatus.value, taskStatus.value,  taskcompleted.value)
 }
 
 </script>
