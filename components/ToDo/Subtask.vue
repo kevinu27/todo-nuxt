@@ -9,17 +9,18 @@
            <p>  {{props.subtask.subtaskDescription}} </p>
            <div class="checkbox-container">
 
-               <div class="checkbox"> <label>  completed </label><input type="checkbox" class="checkbox-checkbox" v-model="completedSubtask"> </div>
+               <div class="checkbox"> <label>  completed </label><input type="checkbox" class="checkbox-checkbox" v-model="completedSubtaskVmodel"> </div>
            </div>
         </div>
-        {{completedSubtask}}
+        {{completedSubtaskVmodel}}
     </div>
 </template>
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
 const tasksStore = useTodoStore()
-const completedSubtask = ref(false)
+const completedSubtaskFromDatabase = props.subtask.subtaskStatus
+const completedSubtaskVmodel = ref(completedSubtaskFromDatabase)
 const props = defineProps({
   subtask: Object
 })
@@ -30,6 +31,16 @@ const removingSubtask = () => {
     tasksStore.removeSubtask(props.subtask._id)
 
 }
+
+watch(completedSubtaskVmodel, async (newSubtask, oldSubtask) => {
+    console.log('newTask', newSubtask)
+    console.log('oldTask', oldSubtask)
+    console.log('completedSubtaskVmodel', completedSubtaskVmodel.value)
+    console.log('props.subtask._id', props.subtask._id)
+    console.log('props.subtask',props.subtask)
+    tasksStore.completeSubtasks(props.subtask._id, props.subtask.subtaskDescription, completedSubtaskVmodel.value)
+
+})
 
 
 </script>

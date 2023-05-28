@@ -44,7 +44,7 @@
             <div class="checkbox"> <label> Mark task as completed </label><input type="checkbox" v-model="taskCompleted" :checked="true"> </div>
             
         </div>
-        <div> taskCompletedFromTaskDetail - {{taskCompletedFromTaskDetail }}</div> 
+        <!-- <div> taskCompletedFromTaskDetail - {{taskCompletedFromTaskDetail }}</div>  -->
     </div>
     </div>
 

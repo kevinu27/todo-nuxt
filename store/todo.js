@@ -295,6 +295,40 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
 //elimino del state esa task, asi me ahorro una llamada y puedo hacer una transicion de que se va esa task
       // this.setTasksFromStorage()
   },
+  async completeSubtasks(subtaskId, subtaskDescription, subtaskStatus ) {
+    
+    const api = axios.create({
+        baseURL: "http://localhost:5000/api/v1",
+        withCredentials: true
+      });
+    const authStore = useAuthStore();
+    const token = authStore.token;
+    
+    try {
+        console.log('token del store pero en el form', token)
+        const res = await api.patch(
+    `/subtasks/${subtaskId}`,
+    {
+      subtaskDescription: subtaskDescription,
+      subtaskStatus: subtaskStatus
+   },
+   {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    },
+    params: {
+        id: subtaskId
+      }
+  }
+);
+            console.log('res------', res)
+    } catch (error) {
+        console.log(error)
+    }
+// cambiar el this.setTasksFromStorage() for un si la respeusta de la llamada al delete da 200 entonces 
+//elimino del state esa task, asi me ahorro una llamada y puedo hacer una transicion de que se va esa task
+    // this.setTasksFromStorage()
+},
 
 
     }
