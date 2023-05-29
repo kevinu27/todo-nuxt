@@ -63,18 +63,31 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
             );
             this.subtasks = res.data.subtasks
             this.tasks = this.tasks.map((task) => {
-            task.subtasks = []; 
+            task.subtasks = [];
+            task.percentageOfCompletition = 0; 
             return task;
             });
-
+            
             console.log('this.task---!!!!!!++++', this.tasks )        
             this.tasks.forEach(task => {
+              let counter = 0
             this.subtasks.forEach(subtask => {
               if(task._id === subtask.tid){
                 task.subtasks.push(subtask)
                 }
-              }) 
+// console.log('subtask.subtaskStatus', subtask.subtaskStatus)
+                if(subtask.subtaskStatus){
+                  counter= counter + 1
+                }
+
+              })
+               const percentage = ((counter/ task.subtasks.length)*100).toString() + "%"
+              // percentage = percentage.toString()
+              console.log('percentage!!!!', percentage)
+              task.percentageOfCompletition = percentage
             })
+
+            console.log('la buena!!!!! los percentajes', this.tasks)
           } catch (error) {
               console.log(error)
           }

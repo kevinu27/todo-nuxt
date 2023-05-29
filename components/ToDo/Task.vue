@@ -1,6 +1,7 @@
 <template>
-   <NuxtLink :to="`/task/${props.task._id}`" style="text-decoration: none; color: inherit;"> <div class="task" >
-        <div class="closing"  ><p  @click="removeTask">+ </p></div>
+   <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
+    <div class="task" >
+        <div class="closing"  ><span  @click="removeTask"> + </span></div>
         <h1>
             {{ props.task.taskName }}
         </h1>
@@ -12,7 +13,14 @@
         </p>
         <p>
             Category: {{ props.task.category }}
-        </p>
+        </p>  
+
+        <div class="completition">
+            <span class="completition-title">
+                completition: 
+            </span>
+            <div class="completition-bar"><div class="completition-bar-inner" :style="{ width: props.task.percentageOfCompletition }"></div> {{props.task.percentageOfCompletition   }}</div>
+        </div>
     </div>
 </NuxtLink >
 </template>
@@ -43,8 +51,14 @@ const removeTask = () => {
 
 
 <style scoped>
+.big-task{
+ 
+    text-decoration: none; 
+    color: inherit;
+
+}
 .task {
-    text-decoration: none;
+    /* text-decoration: none;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -52,33 +66,78 @@ const removeTask = () => {
     justify-content: center;
     background-color: #c2e7ef;
     margin-bottom: 1rem;
-    border-radius: 1rem;
+    border-radius: 3px;
     box-shadow: 5px 5px 5px rgba(30, 30, 30, 0.3);
-    padding-bottom: 2rem;
-    text-align: center;
+    text-align: center; */
+    /* border: 2px solid red; */
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px rgba(30, 30, 30, 0.3);
+    width: 100%;
+    background-color: #c2e7ef;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
 }
 .task p{
-    text-decoration: none;
     margin: 0;
     margin-bottom: 1rem;
+    /* width: 100%; */
+    /* border: 2px solid red; */
+    padding-left: 2rem;
+    /* margin-left: 2rem; */
 }
 .task h1{
     margin: 0;
     margin-bottom: 1rem;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
+    /* border: 2px solid red; */
     font-size: 36px;
+    padding-left: 2rem;
+
 }
 .closing{
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     justify-content: flex-end;
 }
-.closing p {
+.closing span {
     font-size: 3rem;
     margin:0;
     padding:0;
     padding-right: 1rem;
     transform: rotate(-45deg);
+}
+.completition-bar{
+    /* background-color: red;
+    height: 5px;
+    width:40%;
+    margin-bottom: 1rem; */
+    background-color: red;
+    height: 10px;
+    width: 70%;
+    margin-left: 1rem;
+    border-radius: 5px;
+}
+.completition-bar-inner{
+    background-color: blue;
+    /* width: 40%; */
+    height: 100%;
+
+
+}
+.completition-title{
+    /* width: 30%; */
+    
+}
+.completition{
+    /* display: flex;
+    width: 100%;
+    justify-content: flex-start; */
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 </style>
