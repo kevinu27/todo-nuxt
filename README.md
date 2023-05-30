@@ -13,10 +13,7 @@ Nuxt To Do List
 <li>poner un rollo spinner que solo cuando cambie el token a otra cosa si la llamada no da 400, que entonces haga la llamada de la lista al cargar la pagina, para que no sea haciendo click en cargar tasks </li>
 <li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
 <li>poner algo que antes añadir una tarea si un campo esta vacio ponerle en rojo los inputs o algo que indique que falta o que hay un error </li>
-<li>poner un if que si el tasks state tiene algo dentro qu eno haga la llamada para ahorrar llamadas a la base de datos </li>
-<li>poner en el backend que el subtask la referencia no sea el uduario si no la tarea y enviarle la tarea en la peticion</li>
-<li>Hacer que al eliminar no me vaya a detalles de la tarea</li>
+<li>poner un if que si el tasks state tiene algo dentro que no haga la llamada para ahorrar llamadas a la base de datos </li>
 <li>poner lo de las graficas con lo experado y lo conseguido </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
-<li> poner el tipo de tarea: diario, meta vital o cosas asi, para filtrarlas</li>
 <li> iconos para eliminar y editar?</li>

@@ -1,15 +1,19 @@
 <template>
     <div class="main">
-    <!-- <p>index de pages</p> -->
         <section class="todo">
         <ToDoSearchBar/>
         <ToDoForm/>
-        <ToDoList/>
+        <ToDoList v-if="authStore.token"/>
     </section>
     </div>
 </template>
 
+<script setup>
+import { useAuthStore } from '~/store/auth';
+const authStore = useAuthStore();
+console.log('authStore.TOKENNNNNN', authStore.token)
 
+</script>
 
 <style>
 .todo{

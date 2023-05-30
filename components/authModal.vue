@@ -44,7 +44,7 @@ h1 {
   width: 90%;
   /* border: 2px solid red; */
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 0px;
 }
 .modal-overlay {

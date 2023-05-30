@@ -1,8 +1,7 @@
 <template>
     <div class="list">
         <h1 @click="cargarLista">cargar lista</h1>
-        <h1 @click="cargarLista2">cargar lista2</h1>
-        <h1 @click="cargarLista3">cargar lista83</h1>
+        <h1 @click="cargarLista3">console del estado</h1>
         <div class="task-container"
             v-for="task in tasksStore.tasks"
             :key="task._id"
@@ -16,32 +15,15 @@
 <script setup>
 const tasks = ref()
 import { useTodoStore } from '~/store/todo';
+import { useAuthStore } from '~/store/auth';
+const authStore = useAuthStore()
+
 const tasksStore = useTodoStore()
-// tasksStore.getTasks()
-// tasks.value = tasksStore.getTasks()
-const cargarLista = () => {
+tasksStore.setTasksFromStorage()
 
 
-
-    tasksStore.setTasksFromStorage()
-    // tasksStore.setSubtasks()
-
-}
-const cargarLista2 = () => {
-
-
-
-const taskIds= tasksStore.tasks.map(taskId => taskId._id)
-console.log('-------taskIds---', tasksStore.tasks)
-console.log('-------taskIds---', taskIds)
-tasksStore.setSubtasks(taskIds)
-}
 const cargarLista3 = () => {
-
-
-
     console.log('this.task---!!!!!!++++', tasksStore.tasks )        
-
 }
 
 onMounted(() => {
@@ -49,6 +31,9 @@ onMounted(() => {
     // tasks.value =  JSON.parse(localStorage.getItem("tasks"));
     console.log('tasksStore.tasks', tasksStore.tasks)
     tasks.value = tasksStore.tasks
+    if(authStore.token){
+    }
+    console.log('token', authStore.token)
   })
 
 </script>

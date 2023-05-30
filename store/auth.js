@@ -11,6 +11,11 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
         token: null,
         expiresIn:null
     }),
+    computed: {
+        hasTokenChanged() {
+          return this.token;
+        },
+      },
 
     actions: {
         async setAuthModalLogin(showModal) {
