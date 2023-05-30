@@ -7,7 +7,7 @@
             v-for="task in tasksStore.tasks"
             :key="task._id"
         >
-        <ToDoTask :task="task" @removeTask="removeTask"/>    
+        <ToDoTask :task="task"/>    
     </div>
        <!-- {{ tasksStore.tasks}} -->
     </div>

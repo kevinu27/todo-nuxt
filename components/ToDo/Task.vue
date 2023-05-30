@@ -1,7 +1,7 @@
 <template>
    <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
     <div class="task" >
-        <div class="closing"  ><span  @click="removeTask"> + </span></div>
+        <div class="closing"  ><span @click.prevent.stop="removeTask"> + </span></div>
         <h1>
             {{ props.task.taskName }}
         </h1>
@@ -42,7 +42,6 @@ taskData.value =  props.task
 
 const removeTask = () => {
     console.log('--------- props.task.id', props.task._id)
-    // tasksStore.removeTasksFromStorage(props.task.id)
     tasksStore.removeTasks(props.task._id)
 }
 
@@ -58,18 +57,6 @@ const removeTask = () => {
 
 }
 .task {
-    /* text-decoration: none;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #c2e7ef;
-    margin-bottom: 1rem;
-    border-radius: 3px;
-    box-shadow: 5px 5px 5px rgba(30, 30, 30, 0.3);
-    text-align: center; */
-    /* border: 2px solid red; */
     margin-bottom: 1rem;
     border-radius: 3px;
     box-shadow: 5px 5px 5px rgba(30, 30, 30, 0.3);
@@ -114,14 +101,14 @@ const removeTask = () => {
     height: 5px;
     width:40%;
     margin-bottom: 1rem; */
-    background-color: red;
+    background-color:rgb(96, 96, 129);
     height: 10px;
     width: 70%;
     margin-left: 1rem;
     border-radius: 5px;
 }
 .completition-bar-inner{
-    background-color: blue;
+    background-color:rgb(0, 0, 128);
     /* width: 40%; */
     height: 100%;
     border-radius: 5px;
