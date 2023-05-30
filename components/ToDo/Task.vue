@@ -124,6 +124,7 @@ const removeTask = () => {
     background-color: blue;
     /* width: 40%; */
     height: 100%;
+    border-radius: 5px;
 
 
 }

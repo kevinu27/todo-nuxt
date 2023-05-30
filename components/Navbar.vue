@@ -14,9 +14,6 @@
                     
                 </div>
             </div>
-            <p> 
-                    {{ authStore.token }}
-                </p>
     <AuthModal v-if="authStore.loginModal">
         <h1>Login</h1>
         <h3>email</h3>

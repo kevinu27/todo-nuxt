@@ -63,28 +63,36 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
             );
             this.subtasks = res.data.subtasks
             this.tasks = this.tasks.map((task) => {
-            task.subtasks = [];
-            task.percentageOfCompletition = 0; 
-            return task;
+              task.subtasks = [];
+              task.percentageOfCompletition = 0; 
+              return task;
             });
             
-            console.log('this.task---!!!!!!++++', this.tasks )        
+            this.tasks.forEach(task => {
+              this.subtasks.forEach(subtask => {
+                  if(task._id === subtask.tid){
+                    task.subtasks.push(subtask)
+                  }
+              })
+            })
+            //--------------------------------------------///
             this.tasks.forEach(task => {
               let counter = 0
-            this.subtasks.forEach(subtask => {
-              if(task._id === subtask.tid){
-                task.subtasks.push(subtask)
-                }
-// console.log('subtask.subtaskStatus', subtask.subtaskStatus)
-                if(subtask.subtaskStatus){
-                  counter= counter + 1
-                }
-
+              task.subtasks.forEach(subtask => {
+                  if(subtask.subtaskStatus === true){
+                    console.log('subtask.subtaskStatus', subtask.subtaskStatus)
+                    counter = counter + 1
+                  }
               })
-               const percentage = ((counter/ task.subtasks.length)*100).toString() + "%"
-              // percentage = percentage.toString()
-              console.log('percentage!!!!', percentage)
-              task.percentageOfCompletition = percentage
+              if(task.subtasks.length > 0){
+                const percentage = ((counter/ task.subtasks.length)*100).toString() + "%"
+                console.log('counter!!!!', counter)
+                console.log('task.subtasks.length!!!!', task.subtasks.length)
+                console.log('percentage!!!!', percentage)
+                task.percentageOfCompletition = percentage
+              }else{
+                task.percentageOfCompletition = "0%"
+              }
             })
 
             console.log('la buena!!!!! los percentajes', this.tasks)
