@@ -10,10 +10,15 @@ Nuxt To Do List
 <li> poner un regex para verificar que el usuario y la contraseña cumplen un minimo  </li>
 <li> css de los modal de auth login y register  </li>
 <li> limpieza en el store  del todo </li>
-<li>poner un rollo spinner que solo cuando cambie el token a otra cosa si la llamada no da 400, que entonces haga la llamada de la lista al cargar la pagina, para que no sea haciendo click en cargar tasks </li>
+<li>poner un rollo spinner en algunos sitios o algo</li>
 <li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
 <li>poner algo que antes añadir una tarea si un campo esta vacio ponerle en rojo los inputs o algo que indique que falta o que hay un error </li>
-<li>poner un if que si el tasks state tiene algo dentro que no haga la llamada para ahorrar llamadas a la base de datos </li>
 <li>poner lo de las graficas con lo experado y lo conseguido </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
 <li> iconos para eliminar y editar?</li>
+<li> Dentro de la task si le doy a eliminar que elimine y me redirija a la pagina normal </li>
+<li> si entro en ruta prohibida que me redirija a la pagina normal </li>
+<li> poner un if en el home que si estoy en el home el estado de editar se ponga a false para que si me salgo de la task cuando estoy editando al volver se ponga normal </li>
+<li>Transiciones al eliminar elementos</li>
+<li> al eliminar una subtarea quitarla del estado para que se actualice al momento</li>
+<li>limpiar consoles de todos sitios</li>

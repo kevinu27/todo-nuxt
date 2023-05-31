@@ -50,6 +50,8 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
                 //poner una fecha de expiracion valida a la cookie, lo de los 15 minutos
                 document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/;`;
         
+                this.setAuthModalLogin(false)
+                this.setAuthModalRegister(false)
             }).catch(e => console.log('errror', e))
 
         

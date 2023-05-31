@@ -52,13 +52,42 @@
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
-// import { useAuthStore } from '~/store/auth';
-import { useRoute } from 'vue-router'
+import { useAuthStore } from '~/store/auth';
+const authStore = useAuthStore()
 const tasksStore = useTodoStore()
+import { useRouter } from 'vue-router'
+const router = useRouter()
+// import { useAuthStore } from '~/store/auth';
+// import { useRouter } from 'vue-router'
+// const router = useRouter()
 const subtasksForm = ref(false)
 const subtaskDescription = ref('')
 let taskcompleted = false
 const taskCompleted = ref('')
+console.log('taskDetail----prueba')
+if(tasksStore.tasks.length === 0 || !authStore.token){
+    console.log('estoy intentado hacer rouert push')
+    router.replace('/')
+    // router.push('/')
+}
+// const Router = useRouter();
+// Router.beforeEach(async(to, next) => {
+//     console.log('to----------', to.fullPath)
+//     return next('/')
+//         // if(authStore.token){
+//         // return next()
+//         // }
+//         // if(to.fullPath === "/protected" || localStorage.getItem('user') === "true"){
+//         //    authStore.refreshToken()
+//         //    if(authStore.token){
+//         //         return next()
+//         //    }
+//         //    return next('/')
+//         // }
+
+// })
+
+
 
 watch(taskCompleted, async (newTask, oldTask) => {
     console.log('newTask', newTask)

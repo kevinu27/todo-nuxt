@@ -19,7 +19,9 @@ import { useAuthStore } from '~/store/auth';
 const authStore = useAuthStore()
 
 const tasksStore = useTodoStore()
-tasksStore.setTasksFromStorage()
+if(tasksStore.tasks.length === 0){ // para que no haga llamadas cuando cambio de pagina si ya hay task cargadas
+    tasksStore.setTasksFromStorage()
+}
 
 
 const cargarLista3 = () => {

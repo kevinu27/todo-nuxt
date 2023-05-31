@@ -22,7 +22,7 @@
         <input type="password" v-model="password"/>
         <div><p>Authenticating...</p></div>
         <br />
-        <button class="loginButton" @click="loginHandler">Signup</button>
+        <button class="loginButton" @click="loginHandler">Login</button>
         <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>
     </AuthModal>
     <AuthModal v-if="authStore.registerModal">
@@ -64,7 +64,6 @@ Router.beforeEach(async(to, from, next) => {
            }
            return next('/')
         }
-
 })
 
 const authStore = useAuthStore()
@@ -110,7 +109,8 @@ const registerHandler = () => {
     console.log('email and password', email.value,  password.value)
     email.value = '';
     password.value = '';
-
+    authStore.setAuthModalLogin(false)
+  authStore.setAuthModalRegister(false)
 }
 
 const loginHandler = () => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
@@ -119,6 +119,7 @@ const loginHandler = () => { // el async solo hace falta si usas el segundo meto
     console.log('email and password', email.value,  password.value)
     email.value = '';
     password.value = '';
+    // poner aqui que un if que si fue bien la respuesta entonces hace  authStore.setAuthModalLogin(false)   authStore.setAuthModalRegister(false)
 
 }
 
