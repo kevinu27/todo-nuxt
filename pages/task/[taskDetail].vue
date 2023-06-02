@@ -33,7 +33,7 @@
             </form>
         
             <div class="subtasks-card">
-                <div  v-for="subtask in taskDetails.subtasks" :key="subtask._id">
+                <div  v-for="subtask in tasksStore.tasks.find(task => task._id === route.params.taskDetail).subtasks" :key="subtask._id">
                     <ToDoSubtask :subtask="subtask"/>
                 </div>
             </div>   
@@ -65,6 +65,8 @@ const subtaskDescription = ref('')
 let taskcompleted = false
 const taskCompleted = ref('')
 console.log('taskDetail----prueba')
+
+
 if(tasksStore.tasks.length === 0 || !authStore.token){
     console.log('estoy intentado hacer rouert push')
     router.replace('/')

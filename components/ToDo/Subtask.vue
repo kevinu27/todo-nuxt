@@ -29,7 +29,7 @@ console.log(props)
 const removingSubtask = () => {
     console.log('removingSubtask', props.subtask._id)
     tasksStore.removeSubtask(props.subtask._id)
-
+    // tasksStore.setSubtasks()
 }
 
 watch(completedSubtaskVmodel, async (newSubtask, oldSubtask) => {
