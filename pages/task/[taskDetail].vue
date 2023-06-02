@@ -33,7 +33,7 @@
             </form>
         
             <div class="subtasks-card">
-                <div  v-for="subtask in tasksStore.tasks.find(task => task._id === route.params.taskDetail).subtasks" :key="subtask._id">
+                <div v-for="subtask in tasksStore.tasks.find(task => task._id === route.params.taskDetail).subtasks" :key="subtask._id">
                     <ToDoSubtask :subtask="subtask"/>
                 </div>
             </div>   

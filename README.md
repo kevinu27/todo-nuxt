@@ -22,5 +22,3 @@ Nuxt To Do List
 <li>Transiciones al eliminar elementos</li>
 <li> al eliminar una subtarea quitarla del estado para que se actualice al momento</li>
 <li>limpiar consoles de todos sitios</li>
-<li>al eliminar una subtasks que se actualice</li>
-<li>al crear una subtasks que se añada</li>

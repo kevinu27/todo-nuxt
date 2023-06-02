@@ -203,6 +203,19 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                 // this.currentTask= this.subtasks
 
                 console.log('subtas añadida', this.subtasks)
+                this.tasks = this.tasks.map((task) => {
+                    task.subtasks = [];
+                    task.percentageOfCompletition = 0; 
+                    return task;
+                });
+                this.tasks.forEach(task => {
+                    this.subtasks.forEach(subtask => {
+                        if(task._id === subtask.tid){
+                            task.subtasks.push(subtask)
+                        }
+                    })
+                })
+                
 
             } catch (error) {
                 console.log(error)
@@ -217,7 +230,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
           const authStore = useAuthStore();
           const token = authStore.token;
           try {
-              await api.patch(`/tasks/${taskId}`,
+              const res = await api.patch(`/tasks/${taskId}`,
               {
                   taskName: taskName,
                   deathline: deathline,
@@ -235,6 +248,8 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     id: taskId
                 }
               });
+            //   this.tasks.push
+            // console.log('res.data----', res.data)
           } catch (error) {
               console.log(error)
           }
