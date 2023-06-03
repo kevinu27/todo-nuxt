@@ -8,6 +8,7 @@
                 <div class="menu-item" to="/auth" @click="logout" v-if="authStore.token">Logout</div> 
                 <NuxtLink class="menu-item" to="/protected" v-if="authStore.token">section protected</NuxtLink> 
                 <NuxtLink class="menu-item" v-if="authStore.token" @click="tokenConsole" >console del token</NuxtLink> 
+                <span class="material-icons">face</span>
       
                 <!-- <a>df</a>
                     <a>df</a> -->
@@ -40,20 +41,29 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+const head = () => ({
+  link: [
+    // Add the Material Icons stylesheet link
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+  ]
+})
+onMounted(() => {
+  document.head.appendChild(Object.assign(document.createElement('link'), head().link[0]))
+})
+
 import { useAuthStore } from '~/store/auth';
+const authStore = useAuthStore()
 import axios from 'axios'
 const email = ref('');
 const password = ref('');
 const Router = useRouter();
-// import api from '.nuxt/boot/axios.js'
 const api = axios.create({
   baseURL: 'http://localhost:5000/api/v1',
   withCredentials: true
 });
 // esto quizas ponerlo en app.vue
 Router.beforeEach(async(to, from, next) => {
-    // console.log('to', to.fullPath)
-
         if(authStore.token){
         return next()
         }
@@ -65,11 +75,6 @@ Router.beforeEach(async(to, from, next) => {
            return next('/')
         }
 })
-
-const authStore = useAuthStore()
-const token = ref('')
-const expiresIn = ref ('')
-
 
 
 const tokenConsole = () => {
@@ -114,27 +119,17 @@ const registerHandler = () => {
 }
 
 const loginHandler = () => { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
-    console.log("login apretado")
     authStore.loginHandler( email.value,  password.value)
-    console.log('email and password', email.value,  password.value)
     email.value = '';
     password.value = '';
-    // poner aqui que un if que si fue bien la respuesta entonces hace  authStore.setAuthModalLogin(false)   authStore.setAuthModalRegister(false)
-
 }
 
 
-if (process.client) {
-  // Code that requires localStorage
-  console.log('process.client')
-
+if (process.client) { // esto es para que no pete al comprobar localstorage
   if (typeof localStorage !== 'undefined') {
-  console.log('typeof localStorage !== undefined')
-  console.log('localStorage.getItem(user)------', typeof localStorage.getItem('user'))
+//   console.log('localStorage.getItem(user)------', typeof localStorage.getItem('user'))
 
-    // Access localStorage here
     if(localStorage.getItem('user') === "true"){
-    console.log('miro el local storage y da true a user')
     authStore.refreshToken()
 }
   }
@@ -156,8 +151,6 @@ if (process.client) {
     width: auto;
     margin: 0;
     margin-bottom: 5rem;
-    /* padding: 0; */
-
 }
 .menu-item{
     font-size: 20px;
