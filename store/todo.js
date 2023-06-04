@@ -8,7 +8,8 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         tasks: [],
         subtasks: null,
         editTaskModal: false,
-        currentTask: null
+        currentTask: null,
+        areTaskLoaded: false
     }),
 
     actions: {
@@ -31,6 +32,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                 this.tasks = res.data.tasks
                 const taskIds= this.tasks.map(taskId => taskId._id)
                 this.setSubtasks(taskIds)
+                // this.areTaskLoaded = true
             } catch (error) {
                 console.log(error)
             }

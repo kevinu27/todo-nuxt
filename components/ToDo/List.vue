@@ -2,11 +2,19 @@
     <div class="list">
         <h1 @click="cargarLista">cargar lista</h1>
         <h1 @click="cargarLista3">console del estado</h1>
+        <div class="spinner-border" role="status" >
+             <span class="sr-only">Loading...</span>
+        </div>
+        <button type="button" class="btn btn-primary">Primary</button>
         <div class="task-container"
-            v-for="task in tasksStore.tasks"
-            :key="task._id"
+        v-for="task in tasksStore.tasks"
+        :key="task._id"
         >
-        <ToDoTask :task="task"/>    
+        <!-- <span class="material-icons">face</span> -->
+        <Transition name="fade">
+            <ToDoTask :task="task" v-if="tasksStore.areTaskLoaded"/>    
+        </Transition>
+
     </div>
        <!-- {{ tasksStore.tasks}} -->
     </div>
@@ -21,6 +29,13 @@ const authStore = useAuthStore()
 const tasksStore = useTodoStore()
 if(tasksStore.tasks.length === 0){ // para que no haga llamadas cuando cambio de pagina si ya hay task cargadas
     tasksStore.setTasksFromStorage()
+    var delayInMilliseconds = 1000; //1 second
+
+setTimeout(function() {
+  //your code to be executed after 1 second 
+  tasksStore.areTaskLoaded = true
+}, delayInMilliseconds);
+   
 }
 
 
@@ -44,4 +59,19 @@ onMounted(() => {
 .list{
     width: 100%;
 }
+.fade-enter-from{
+    opacity:0;
+}
+.fade-enter-to{
+    opacity: 1;
+}
+.fade-enter-active{
+    transition: all 2s ease;
+}
+.fade-leave-from{}
+.fade-leave-to{}
+.fade-leave-active{}
+
+
+
 </style>

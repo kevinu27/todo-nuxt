@@ -115,10 +115,7 @@ const removeTask = () => {
 
 
 }
-.completition-title{
-    /* width: 30%; */
-    
-}
+
 .completition{
     /* display: flex;
     width: 100%;

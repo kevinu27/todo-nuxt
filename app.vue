@@ -8,39 +8,27 @@
 </template>
 
 <script setup>
-// const Router = useRouter();
-
-
-// Router.beforeEach((to, from, next) => {
-//     console.log('to', to)
-//     next()
-// })
-
-// const routes = [
-
-//   {
-//     path: '/protected',
-//     name: 'protected',
-//     component: () => import('pages/protected.vue'),
-//     meta: { meta: {auth: true} }, // Add customObject to the meta object
-//   },
-//   Add more routes with custom properties as needed
-// ];
-
-// Middleware function
-// const authMiddleware = ({ from, redirect, route }) => {
-//   const authRequired = route.meta?.auth; // Access custom property from route.meta
-
-//   if (authRequired && !authStore.token) {
-//     return redirect('/auth');
-//   }
-// };
-
-// Apply the middleware
-// export default {
-//   middleware: authMiddleware,
-// };
-
+ useHead({
+    title: "this is the title",
+    link: [
+      {
+        href: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css",
+        rel: "stylesheet",
+        integrity: "sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx",
+        crossorigin: "anonymous"
+      },
+      { 
+        rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
+      },
+    ],
+    script: [
+      {
+        src: "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js",
+        integrity: "sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa",
+        crossorigin: "anonymous"
+      }
+    ]
+  })
 
 
 </script>

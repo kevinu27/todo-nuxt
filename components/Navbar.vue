@@ -41,16 +41,9 @@
 </template>
 
 <script setup>
+
+
 import { onMounted } from 'vue'
-const head = () => ({
-  link: [
-    // Add the Material Icons stylesheet link
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
-  ]
-})
-onMounted(() => {
-  document.head.appendChild(Object.assign(document.createElement('link'), head().link[0]))
-})
 
 import { useAuthStore } from '~/store/auth';
 const authStore = useAuthStore()
