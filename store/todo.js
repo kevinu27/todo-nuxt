@@ -9,7 +9,8 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         subtasks: null,
         editTaskModal: false,
         currentTask: null,
-        areTaskLoaded: false
+        areTaskLoaded: false,
+        searchBarFilters: ['daily', 'long term task goals', 'short term goals', 'health', 'skills']
     }),
 
     actions: {

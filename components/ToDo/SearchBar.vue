@@ -2,28 +2,36 @@
     <div class="search-bar">
         <!-- <p>Search Bar</p> -->
         <form action="" class="form">
+       
+            <ToDoFIlterDropdown/>
             <input type="text" id="fname" name="task" placeholder="search a tasks..." class="input">
-            <button class="button-searchBar">Search</button>
+            <button class="button-searchBar btn btn-primary">Search</button>
+
+
         </form>
     </div>
 </template>
+<script setup>
+
+</script>
 
 <style scoped>
 
 .button-searchBar{
-    background-color: #007bff;
-    border: none;
-    box-shadow: none;
-    outline: none;
     font-size: 2rem;
-    padding: 0.5rem 1rem;
     border-top-right-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    background-color: #23242a !important;
 }
 .input{
     width: 70%;
-    border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+    /* border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem; */
   height: 3rem;
 }
 input::placeholder {
@@ -43,7 +51,17 @@ input::placeholder {
 }
 .search-bar{
     width: 100%;
-    /* border:3px solid yellow; */
     margin-bottom: 2rem;
+}
+.filter-search-bar{
+    font-size: 2rem;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    border-bottom-left-radius: 0.3rem;
+    border-top-left-radius: 0.3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    background-color: #0d6efd;
 }
 </style>
