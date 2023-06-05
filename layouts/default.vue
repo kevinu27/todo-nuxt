@@ -25,7 +25,7 @@
   </script>
   
   <style>
-  .modal-overlay {
+  /* .modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -48,5 +48,5 @@
     padding-left: 1rem;
     padding-top: 3rem;
     padding-bottom: 7rem;
-  }
+  } */
   </style>

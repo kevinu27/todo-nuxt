@@ -12,7 +12,6 @@
                <div class="checkbox"> <label>  completed </label><input type="checkbox" class="checkbox-checkbox" v-model="completedSubtaskVmodel"> </div>
            </div>
         </div>
-        {{completedSubtaskVmodel}}
     </div>
 </template>
 

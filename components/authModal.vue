@@ -5,8 +5,10 @@
             <div class="closingX" @click="closeModal">
                 <h1>X</h1>
             </div>
-            
-            <slot />
+            <div class="modal-content">
+              <slot />
+
+            </div>
         </div>
         
     </div>
@@ -61,13 +63,20 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99;
-  width: 100%;
-  max-width: 400px;
+  width: 500px;
   background-color: #fff;
   border-radius: 16px;
   padding-right: 1rem;
   padding-left: 1rem;
   padding-top: 3rem;
   padding-bottom: 7rem;
+}
+.modal-content{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 </style>

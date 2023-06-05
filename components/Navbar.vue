@@ -22,7 +22,6 @@
         <input type="email" v-model="email"/>
         <h3>password</h3>
         <input type="password" v-model="password"/>
-        <div><p>Authenticating...</p></div>
         <br />
         <button class="loginButton" @click="loginHandler">Login</button>
         <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>
@@ -33,7 +32,6 @@
         <input type="email" v-model="email"/>
         <h3>password</h3>
         <input type="password" v-model="password"/>
-        <!-- <div><p>Authenticating...</p></div> -->
         <br />
         <button class="loginButton" @click="registerHandler">Signup</button>
         <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>

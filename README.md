@@ -9,7 +9,6 @@ Nuxt To Do List
 <li>cambiar los localstorage user a false por remove localstorage asi no hace falta pregutnar si es una string o un booleano el true </li>
 <li>poner un regex para verificar que el usuario y la contraseña cumplen un minimo  </li>
 <li>css de los modal de auth login y register</li>
-<li>limpieza en el store del todo </li>
 <li>poner un rollo spinner en algunos sitios o algo</li>
 <li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
 <li>poner algo que antes añadir una tarea si un campo esta vacio ponerle en rojo los inputs o algo que indique que falta o que hay un error </li>
@@ -20,4 +19,5 @@ Nuxt To Do List
 <li> si entro en ruta prohibida que me redirija a la pagina normal </li>
 <li> poner un if en el home que si estoy en el home el estado de editar se ponga a false para que si me salgo de la task cuando estoy editando al volver se ponga normal </li>
 <li>Transiciones al eliminar elementos</li>
+<li>cambiar la fuente por defecto a sans serif</li>
 

@@ -22,7 +22,7 @@
             <div class="completition-bar">
                 <div class="completition-bar-inner" :style="{ width: props.task.percentageOfCompletition }">
                 </div> 
-                <span class="completetion-percentage"> {{percentageOfCompletition}} 
+                <span class="completetion-percentage"> {{props.task.percentageOfCompletition}}  
                 </span>
             </div>
         </div>
@@ -50,16 +50,6 @@ const removeTask = () => {
 }
 
 
-const percentageOfCompletition = computed(() => {
-  if(props.task.percentageOfCompletition.substring(0, 1) == 0 ){
-    console.log('if props.task.percentageOfCompletition.substring(0, 1)', props.task.percentageOfCompletition.substring(0, 1))
-   return props.task.percentageOfCompletition.substring(0, 2)
-  }else {
-    console.log('else props.task.percentageOfCompletition.substring(0, 1)', props.task.percentageOfCompletition.substring(0, 1))
-
-    return props.task.percentageOfCompletition.substring(0, 2) + '%'
-  }
-})
 </script>
 
 
