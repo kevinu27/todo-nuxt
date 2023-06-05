@@ -1,21 +1,8 @@
 <template>
     <div >
-        <!-- <div class="dropdown">
-  <div class="select">
-    <span class="selected">Figma</span>
-    <div class="caret"></div>
-  </div>
-  <ul class="menu">
-    <li>Framer</li>
-    <li>Sketch</li>
-    <li>Invision Studio</li>
-    <li class="active">Figma</li>
-    <li>Adobe XD</li>
-  </ul>
-</div> -->
-<select v-model="SelectedFilter" class="select">
-      <option value="" v-for="filter in tasksStore.searchBarFilters" :key="filter">{{ filter}}</option>
-    </select>
+        <select v-model="SelectedFilter" class="select">
+             <option value="" v-for="filter in tasksStore.searchBarFilters" :key="filter">{{ filter}}</option>
+        </select>
     </div>
 </template>
 
@@ -23,41 +10,6 @@
 const SelectedFilter = ref('')
 import { useTodoStore } from '~/store/todo';
 const tasksStore = useTodoStore()
-
-onMounted(() => {
-
-
-// const dropdowns = document.querySelectorAll('.dropdown');
-
-// dropdowns.forEach(dropdown => {
-//     const select = dropdown.querySelector('.select');
-//     const caret = dropdown.querySelector('.caret');
-//     const menu = dropdown.querySelector('.menu');
-//     const options = dropdown.querySelectorAll('.menu li');
-//     const selected = dropdown.querySelector('.selected');
-
-  
-// select.addEventListener('click', () => {
-//   select.classList.toggle('select-clicked');
-//   caret.classList.toggle('caret-rotate');
-//   menu.classList.toggle('menu-open');
-// });
-
-// options.forEach(option => {
-//   option.addEventListener('click', () => {
-//       selected.innerText = option.innerText;
-//       select.classList.remove('select-clicked');
-//       caret.classList.remove('caret-rotate');
-//       menu.classList.remove('menu-open');
-    
-//       options.forEach(option => {
-//         option.classList.remove('active');
-//         });
-//           option.classList.add('active');
-//   });
-// });
-// });
-})
 </script>
 
 
@@ -101,6 +53,7 @@ body {
   border-top-left-radius: 0.3rem;
   height: 3rem;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 

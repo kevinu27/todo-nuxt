@@ -24,20 +24,12 @@ const completedSubtaskVmodel = ref(completedSubtaskFromDatabase)
 const props = defineProps({
   subtask: Object
 })
-console.log(props)
 
 const removingSubtask = () => {
-    console.log('removingSubtask', props.subtask._id)
     tasksStore.removeSubtask(props.subtask._id)
-    // tasksStore.setSubtasks()
 }
 
 watch(completedSubtaskVmodel, async (newSubtask, oldSubtask) => {
-    console.log('newTask', newSubtask)
-    console.log('oldTask', oldSubtask)
-    console.log('completedSubtaskVmodel', completedSubtaskVmodel.value)
-    console.log('props.subtask._id', props.subtask._id)
-    console.log('props.subtask',props.subtask)
     tasksStore.completeSubtasks(props.subtask._id, props.subtask.subtaskDescription, completedSubtaskVmodel.value)
 
 })

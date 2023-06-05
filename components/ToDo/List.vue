@@ -40,18 +40,10 @@ setTimeout(function() {
 }
 
 
-const cargarLista3 = () => {
-    console.log('this.task---!!!!!!++++', tasksStore.tasks )        
-}
-
 onMounted(() => {
-    console.log("Component onMounted");
-    // tasks.value =  JSON.parse(localStorage.getItem("tasks"));
-    console.log('tasksStore.tasks', tasksStore.tasks)
     tasks.value = tasksStore.tasks
     if(authStore.token){
     }
-    console.log('token', authStore.token)
   })
 
 </script>

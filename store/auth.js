@@ -19,19 +19,15 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
 
     actions: {
         async setAuthModalLogin(showModal) {
-            console.log('llamado al setAuthModalLogin')
             this.loginModal = showModal
         },
         async setAuthModalRegister(showModal) {
-            console.log('llamado al setAuthModalRegister')
             this.registerModal = showModal
         },
         async setAuthToken(token){
-            console.log('el toke en el authstore: ', token)
             this.token = token
         },
         async loginHandler ( email,  password) { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
-            console.log("login apretado")
             axios.post('http://localhost:5000/api/v1/login',     {
             email: email,
             password: password
@@ -39,7 +35,6 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
             // password: "123123"
             })
             .then(res => {
-                console.log('res----', res)
                 this.token = res.data.token
                 this.setAuthToken(res.data.token)
                 this.expiresIn = res.data.expiresIn
@@ -57,7 +52,6 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
         
         },
         async registerHandler ( email,  password) { // el async solo hace falta si usas el segundo metodo con el await, pero con el then no haria falta añadirle el async
-            console.log("register apretado")
             axios.post('http://localhost:5000/api/v1/register',     {
             email: email,
             password: password

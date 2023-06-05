@@ -64,7 +64,6 @@ const subtasksForm = ref(false)
 const subtaskDescription = ref('')
 let taskcompleted = false
 const taskCompleted = ref('')
-console.log('taskDetail----prueba')
 
 
 if(tasksStore.tasks.length === 0 || !authStore.token){
@@ -92,16 +91,11 @@ if(tasksStore.tasks.length === 0 || !authStore.token){
 
 
 watch(taskCompleted, async (newTask, oldTask) => {
-    console.log('newTask', newTask)
-    console.log('oldTask', oldTask)
     if(oldTask){
         taskcompleted = false
     }else {
         taskcompleted = true
     }
-    console.log('taskDetails', taskDetails )
-    console.log('tasksStore.tasks', tasksStore.tasks )
-    console.log(' taskDetails.taskStatus****** ', taskDetails.taskStatus  )
     tasksStore.completeTasks(taskDetails._id, taskDetails.taskName, taskDetails.deathline, taskDetails.taskDescription, taskDetails.priority, taskDetails.category, taskDetails.taskStatus, taskcompleted)
 })
 
@@ -113,12 +107,7 @@ if(taskDetails.taskcompleted){
 }else {
     taskCompleted.value = false
 } 
-console.log('taskCompletedFromTaskDetail', taskCompletedFromTaskDetail)
 
-console.log(' taskDetails****** ', taskDetails)
-
-console.log('------------',taskDetails.taskStatus)
-console.log('------------',taskDetails)
 const showSubtaskForm = () => {
     subtasksForm.value = true
 }

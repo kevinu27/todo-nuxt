@@ -19,7 +19,12 @@
             <span class="completition-title">
                 completition: 
             </span>
-            <div class="completition-bar"><div class="completition-bar-inner" :style="{ width: props.task.percentageOfCompletition }"></div> {{props.task.percentageOfCompletition   }}</div>
+            <div class="completition-bar">
+                <div class="completition-bar-inner" :style="{ width: props.task.percentageOfCompletition }">
+                </div> 
+                <span class="completetion-percentage"> {{percentageOfCompletition}} 
+                </span>
+            </div>
         </div>
     </div>
 </NuxtLink >
@@ -41,20 +46,27 @@ taskData.value =  props.task
 })
 
 const removeTask = () => {
-    console.log('--------- props.task.id', props.task._id)
     tasksStore.removeTasks(props.task._id)
 }
 
-// console.log('props', props.task._id)
+
+const percentageOfCompletition = computed(() => {
+  if(props.task.percentageOfCompletition.substring(0, 1) == 0 ){
+    console.log('if props.task.percentageOfCompletition.substring(0, 1)', props.task.percentageOfCompletition.substring(0, 1))
+   return props.task.percentageOfCompletition.substring(0, 2)
+  }else {
+    console.log('else props.task.percentageOfCompletition.substring(0, 1)', props.task.percentageOfCompletition.substring(0, 1))
+
+    return props.task.percentageOfCompletition.substring(0, 2) + '%'
+  }
+})
 </script>
 
 
 <style scoped>
 .big-task{
- 
     text-decoration: none; 
     color: inherit;
-
 }
 .task {
     margin-bottom: 1rem;
@@ -70,22 +82,16 @@ const removeTask = () => {
 .task p{
     margin: 0;
     margin-bottom: 1rem;
-    /* width: 100%; */
-    /* border: 2px solid red; */
     padding-left: 2rem;
-    /* margin-left: 2rem; */
 }
 .task h1{
     margin: 0;
     margin-bottom: 1rem;
-    /* margin-top: 1rem; */
-    /* border: 2px solid red; */
     font-size: 36px;
     padding-left: 2rem;
 
 }
 .closing{
-    /* width: 100%; */
     display: flex;
     justify-content: flex-end;
 }
@@ -124,5 +130,8 @@ const removeTask = () => {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+}
+.completetion-percentage{
+
 }
 </style>

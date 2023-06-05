@@ -21,7 +21,6 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
               });
             const authStore = useAuthStore();
             const token = authStore.token;
-            console.log('token del list en el authstore', token)
             try {
                 const res = await api.get('/tasks',
                 {
@@ -29,7 +28,6 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     'Authorization': 'Bearer ' + token
                   }
                 });
-                console.log('res------setTasksFromStorage',  res.data)
                 this.tasks = res.data.tasks
                 const taskIds= this.tasks.map(taskId => taskId._id)
                 this.setSubtasks(taskIds)
@@ -87,7 +85,6 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
             },
 
         async removeTasks(taskId) {
-            console.log('taskId', taskId)
             const api = axios.create({
                 baseURL: "http://localhost:5000/api/v1",
                 withCredentials: true
@@ -134,7 +131,6 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                         id: subtaskId
                     }
                 });
-                // console.log(res)
                 this.subtasks = this.subtasks.filter(subtask => subtask._id !== subtaskId)
                 this.tasks = this.tasks.map((task) => {
                     task.subtasks = [];
@@ -182,7 +178,6 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         },
 
         async addSubtask(subtaskId, subtaskDescription) {
-            console.log('addSubtask en el todo store')
             const api = axios.create({
                 baseURL: "http://localhost:5000/api/v1",
                 withCredentials: true
@@ -200,12 +195,10 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                       'Authorization': 'Bearer ' + token
                     }
                 });
-                console.log('subtas añadida', res.data)
                 this.subtasks.push(res.data.newSubtask)
                 // this.subtasks = [...this.subtasks, res.data.newSubtask]
                 // this.currentTask= this.subtasks
 
-                console.log('subtas añadida', this.subtasks)
                 this.tasks = this.tasks.map((task) => {
                     task.subtasks = [];
                     task.percentageOfCompletition = 0; 
@@ -251,8 +244,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     id: taskId
                 }
               });
-            //   this.tasks.push
-            // console.log('res.data----', res.data)
+
           } catch (error) {
               console.log(error)
           }

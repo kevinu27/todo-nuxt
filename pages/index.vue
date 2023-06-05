@@ -11,7 +11,6 @@
 <script setup>
 import { useAuthStore } from '~/store/auth';
 const authStore = useAuthStore();
-console.log('authStore.TOKENNNNNN', authStore.token)
 
 </script>
 
@@ -22,14 +21,12 @@ console.log('authStore.TOKENNNNNN', authStore.token)
     justify-content: center;
     align-items: center;
     width: 60%;
-    /* background-color: red; */
 
 }
 .main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: green; */
     width: 100%;
 }
 </style>

@@ -16,7 +16,6 @@
 import { useAuthStore } from "~/store/auth";
 const authStore = useAuthStore();
 const closeModal = (e) => {
-  console.log("closing clicked")
   authStore.setAuthModalLogin(false)
   authStore.setAuthModalRegister(false)
 

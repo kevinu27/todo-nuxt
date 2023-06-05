@@ -57,33 +57,7 @@ const category = ref('')
 const id = `${Date.now()}-${Math.random()}`
 const addTaskhandle = async (e) => {
     e.preventDefault()
-    // poner esto en pinia
-    console.log('token que funcionaba', authStore.token)
-    
     tasksStore.addTask(taskName.value, deathline.value, taskDescription.value, priority.value, category.value, id)
-
-// aqui poner lo de guardar una task en el store despeus de haberlo probado aqui
-//     try {
-//         console.log('token del store pero en el form', authStore.token)
-//         const res = await api.post(
-//   '/tasks',
-//   {
-//     taskName: taskName.value,
-//     deathline: deathline.value,
-//     priority: priority.value,
-//     taskDescription: taskDescription.value
-//   },
-//   {
-//     headers: {
-//       'Authorization': 'Bearer ' + authStore.token
-//     }
-//   }
-// );
-//             console.log('res------', res.data)
-//     } catch (error) {
-//         console.log(error)
-//     }
-
 
 }
 </script>

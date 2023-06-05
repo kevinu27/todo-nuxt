@@ -26,13 +26,14 @@
     height: 3rem;
     display: flex;
     align-items: center;
-    background-color: #23242a !important;
+    background-color: #23242a;
+    color:white;
 }
 .input{
     width: 70%;
     /* border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem; */
-  height: 3rem;
+  height: 2.7rem;
 }
 input::placeholder {
   /* color: red; */

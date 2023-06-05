@@ -78,22 +78,16 @@ const tokenConsole = () => {
     
 }
 const loginModal = () => {
-    console.log("login clicked")
     authStore.setAuthModalLogin(true)
-    authStore.setAuthModalRegister(false)
-    console.log('authStore.loginModal', authStore.loginModal)
-    
+    authStore.setAuthModalRegister(false)    
 }
   const closeModal = () => {
-    console.log("closing clicked")
     authStore.setAuthModalLogin(false)
     authStore.setAuthModalRegister(false)
 
 
 }
 const changeToRegister = () => { 
-
-console.log('register')
 authStore.setAuthModalRegister(true)
 authStore.setAuthModalLogin(false)
 
@@ -105,9 +99,7 @@ const logout = (e) => { //
 
 
 const registerHandler = () => { 
-    console.log("login apretado")
     authStore.registerHandler( email.value,  password.value)
-    console.log('email and password', email.value,  password.value)
     email.value = '';
     password.value = '';
     authStore.setAuthModalLogin(false)

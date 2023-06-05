@@ -20,6 +20,4 @@ Nuxt To Do List
 <li> si entro en ruta prohibida que me redirija a la pagina normal </li>
 <li> poner un if en el home que si estoy en el home el estado de editar se ponga a false para que si me salgo de la task cuando estoy editando al volver se ponga normal </li>
 <li>Transiciones al eliminar elementos</li>
-<li> al eliminar una subtarea quitarla del estado para que se actualice al momento</li>
-<li>limpiar consoles de todos sitios</li>
-<li>añadir fecha de cracion en el backedn</li>
+
