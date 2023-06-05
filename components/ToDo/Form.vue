@@ -3,15 +3,15 @@
         <form class="form2">
             <div class="input-line"> 
                 <label>Task title</label>
-                <input type="text" id="fname" name="task" placeholder="type a new task" class="input" v-model="taskName">
+                <input type="text" id="TaskTitle" name="task" placeholder="type a new task" class="input" v-model="taskName">
             </div>
             <div class="input-line"> 
                 <label>deathline</label>
-                <input type="date" id="fname" name="task"  class="input" v-model="deathline">
+                <input type="date" id="deathline" name="task"  class="input" v-model="deathline">
             </div>
             <div class="input-line"> 
                 <label>description</label>
-                <input type="text" id="fname" name="task" placeholder="type the description of the task" class="input" v-model="taskDescription">
+                <input type="text" id="taskDescription" name="task" placeholder="type the description of the task" class="input" v-model="taskDescription">
             </div>
             <div class="input-line"> 
                 <label>priority</label>

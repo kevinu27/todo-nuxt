@@ -8,7 +8,8 @@
                 <div class="menu-item" to="/auth" @click="logout" v-if="authStore.token">Logout</div> 
                 <NuxtLink class="menu-item" to="/protected" v-if="authStore.token">section protected</NuxtLink> 
                 <NuxtLink class="menu-item" v-if="authStore.token" @click="tokenConsole" >console del token</NuxtLink> 
-                <span class="material-icons">face</span>
+                <!-- <span class="material-icons">face</span> -->
+                
       
                 <!-- <a>df</a>
                     <a>df</a> -->
@@ -41,9 +42,10 @@
 </template>
 
 <script setup>
+import { useTodoStore } from '~/store/todo';
+const tasksStore = useTodoStore()
 
 
-import { onMounted } from 'vue'
 
 import { useAuthStore } from '~/store/auth';
 const authStore = useAuthStore()
@@ -79,6 +81,7 @@ const loginModal = () => {
     console.log("login clicked")
     authStore.setAuthModalLogin(true)
     authStore.setAuthModalRegister(false)
+    console.log('authStore.loginModal', authStore.loginModal)
     
 }
   const closeModal = () => {

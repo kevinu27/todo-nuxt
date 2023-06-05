@@ -1,11 +1,11 @@
 <template>
     <div> 
-
         <div class="modal-overlay" v-if="authStore.loginModal || authStore.registerModal"></div>
         <div class="modal" v-if="authStore.loginModal || authStore.registerModal">
             <div class="closingX" @click="closeModal">
                 <h1>X</h1>
             </div>
+            
             <slot />
         </div>
         

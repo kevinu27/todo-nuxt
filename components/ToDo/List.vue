@@ -3,9 +3,7 @@
         <!-- <h1 @click="cargarLista">cargar lista</h1>
         <h1 @click="cargarLista3">console del estado</h1> -->
         <div class="spin" v-if="!tasksStore.areTaskLoaded">
-            <div class="spinner-border" role="status" >
-                 <span class="sr-only"></span>
-            </div>
+            <div class="spinner"></div>
         </div>
         <!-- <button type="button" class="btn btn-primary">Primary</button> -->
         <div class="task-container"
@@ -26,6 +24,7 @@
 const tasks = ref()
 import { useTodoStore } from '~/store/todo';
 import { useAuthStore } from '~/store/auth';
+
 const authStore = useAuthStore()
 
 const tasksStore = useTodoStore()
@@ -77,6 +76,21 @@ onMounted(() => {
 .spin{
     display: flex;
     justify-content: center;
+
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 </style>
