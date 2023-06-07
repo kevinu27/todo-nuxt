@@ -115,12 +115,10 @@ tasksStore.currentTask = taskDetails
 
 
 const editTaskhandle = () => {
-console.log('edit task')
     tasksStore.editTaskModal = true
 }
 
 const removeTaskhandle = () => {
-    console.log('remove task')
 
 }
 
@@ -129,7 +127,6 @@ const closeSubtaskForm = () => {
 }
 const addsubTaskhandle = (e) => {
     e.preventDefault()
-   console.log('aqui hago peticion de crear subtask')
     //llamada la funcion en el action y e le pasan los valores y el 
     tasksStore.addSubtask(taskDetails._id, subtaskDescription.value)
 }

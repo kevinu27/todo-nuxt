@@ -6,6 +6,7 @@ import axios from "axios";
 export const useTodoStore = defineStore('todo', { //'todo' nombre del store
     state: () => ({
         tasks: [],
+        filteredTasks: [],
         subtasks: null,
         editTaskModal: false,
         currentTask: null,
@@ -29,7 +30,8 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                   }
                 });
                 this.tasks = res.data.tasks
-                const taskIds= this.tasks.map(taskId => taskId._id)
+                this.filteredTasks = this.tasks
+                const taskIds= this.filteredTasks.map(taskId => taskId._id)
                 this.setSubtasks(taskIds)
                 // this.areTaskLoaded = true
             } catch (error) {
@@ -53,13 +55,12 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                   }
                 });
                 this.subtasks = res.data.subtasks
-                this.tasks = this.tasks.map((task) => {
+                this.filteredTasks = this.filteredTasks.map((task) => {
                     task.subtasks = [];
                     task.percentageOfCompletition = 0; 
                     return task;
                 });
-              
-                this.tasks.forEach(task => {
+                this.filteredTasks.forEach(task => {
                     this.subtasks.forEach(subtask => {
                         if(task._id === subtask.tid){
                             task.subtasks.push(subtask)
@@ -67,18 +68,19 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     })
                 })
                 //--------------------------------------------/// porcentajes
-                this.tasks.forEach(task => {
+                this.filteredTasks.forEach(task => {
                     let counter = 0
                     task.subtasks.forEach(subtask => {
                         if(subtask.subtaskStatus === true){
                             counter = counter + 1
                         }})
-                    if(task.subtasks.length > 0){
-                      const percentage = ((counter/ task.subtasks.length)*100).toString() + "%"
-                      task.percentageOfCompletition = percentage
-                    }else{
-                      task.percentageOfCompletition = "0%"
-                    }})
+                        if(task.subtasks.length > 0){
+                            const percentage = ((counter/ task.subtasks.length)*100).toString() + "%"
+                            task.percentageOfCompletition = percentage
+                        }else{
+                            task.percentageOfCompletition = "0%"
+                        }})
+                        // this.filteredTasks = this.tasks
             } catch (error) {
                 console.log(error)
             }
@@ -132,12 +134,12 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     }
                 });
                 this.subtasks = this.subtasks.filter(subtask => subtask._id !== subtaskId)
-                this.tasks = this.tasks.map((task) => {
+                this.filteredTasks = this.filteredTasks.map((task) => {
                     task.subtasks = [];
                     task.percentageOfCompletition = 0; 
                     return task;
                 });
-                this.tasks.forEach(task => {
+                this.filteredTasks.forEach(task => {
                     this.subtasks.forEach(subtask => {
                         if(task._id === subtask.tid){
                             task.subtasks.push(subtask)
@@ -171,7 +173,7 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     'Authorization': 'Bearer ' + token
                   }
                 });
-                this.tasks.push(res.data.newTask)
+                this.filteredTasks.push(res.data.newTask)
             } catch (error) {
                 console.log(error)
             }
@@ -199,12 +201,12 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                 // this.subtasks = [...this.subtasks, res.data.newSubtask]
                 // this.currentTask= this.subtasks
 
-                this.tasks = this.tasks.map((task) => {
+                this.filteredTasks = this.filteredTasks.map((task) => {
                     task.subtasks = [];
                     task.percentageOfCompletition = 0; 
                     return task;
                 });
-                this.tasks.forEach(task => {
+                this.filteredTasks.forEach(task => {
                     this.subtasks.forEach(subtask => {
                         if(task._id === subtask.tid){
                             task.subtasks.push(subtask)

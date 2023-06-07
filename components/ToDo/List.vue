@@ -7,7 +7,7 @@
         </div>
         <!-- <button type="button" class="btn btn-primary">Primary</button> -->
         <div class="task-container"
-        v-for="task in tasksStore.tasks"
+        v-for="task in tasksStore.filteredTasks"
         :key="task._id"
         >
         <!-- <span class="material-icons">face</span> -->

@@ -1,15 +1,19 @@
 <template>
     <div >
-        <select v-model="SelectedFilter" class="select">
-             <option value="" v-for="filter in tasksStore.searchBarFilters" :key="filter">{{ filter}}</option>
+        <select v-model="SelectedFilter" class="select"  @change="handleFilterChange">
+             <option :value=filter v-for="filter in tasksStore.searchBarFilters" :key="filter">{{ filter}}</option>
         </select>
     </div>
 </template>
 
 <script setup>
-const SelectedFilter = ref('')
 import { useTodoStore } from '~/store/todo';
-const tasksStore = useTodoStore()
+const SelectedFilter = ref('');
+const tasksStore = useTodoStore();
+
+function handleFilterChange() {
+  console.log(SelectedFilter.value);
+}
 </script>
 
 
