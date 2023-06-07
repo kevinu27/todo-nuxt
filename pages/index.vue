@@ -9,9 +9,11 @@
 </template>
 
 <script setup>
+import { useTodoStore } from '~/store/todo';
+const tasksStore = useTodoStore()
 import { useAuthStore } from '~/store/auth';
 const authStore = useAuthStore();
-
+tasksStore.editTaskModal = false
 </script>
 
 <style>

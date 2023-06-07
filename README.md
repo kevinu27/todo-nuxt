@@ -17,7 +17,6 @@ Nuxt To Do List
 <li> iconos para eliminar y editar?</li>
 <li> Dentro de la task si le doy a eliminar que elimine y me redirija a la pagina normal </li>
 <li> si entro en ruta prohibida que me redirija a la pagina normal </li>
-<li> poner un if en el home que si estoy en el home el estado de editar se ponga a false para que si me salgo de la task cuando estoy editando al volver se ponga normal </li>
 <li>Transiciones al eliminar elementos</li>
 <li>cambiar la fuente por defecto a sans serif</li>
 
