@@ -14,7 +14,7 @@ const SelectedFilter = ref(tasksStore.searchBarFilters[0]);
 function handleFilterChange(e) {
   e.preventDefault()
   console.log(tasksStore.filteredTasks);
-  if(SelectedFilter === tasksStore.searchBarFilters[0] ){
+  if(SelectedFilter.value === tasksStore.searchBarFilters[0] ){
     console.log('tasksStore.searchBarFilters[0]')
     tasksStore.filteredTasks = tasksStore.tasks
 
