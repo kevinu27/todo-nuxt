@@ -8,11 +8,27 @@
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
-const SelectedFilter = ref('');
 const tasksStore = useTodoStore();
+const SelectedFilter = ref(tasksStore.searchBarFilters[0]);
 
-function handleFilterChange() {
-  console.log(SelectedFilter.value);
+function handleFilterChange(e) {
+  e.preventDefault()
+  console.log(tasksStore.filteredTasks);
+  if(SelectedFilter === tasksStore.searchBarFilters[0] ){
+    console.log('tasksStore.searchBarFilters[0]')
+    tasksStore.filteredTasks = tasksStore.tasks
+
+  }else {
+    tasksStore.filteredTasks = tasksStore.tasks
+    tasksStore.filteredTasks.map(task => console.log(task.category) )
+    console.log(tasksStore.filteredTasks.category)
+    console.log('tasksStore.filteredTasks antes', tasksStore.filteredTasks)
+
+    tasksStore.filteredTasks =  tasksStore.filteredTasks.filter(task =>{ 
+      console.log(' task.category == SelectedFilter', task.category, "+" , SelectedFilter.value)
+     return task.category === SelectedFilter.value})
+    console.log('tasksStore.filteredTasks despues', tasksStore.filteredTasks)
+  }
 }
 </script>
 

@@ -27,8 +27,8 @@
                 <select v-model="category" class="input">
                     <option value="">Category</option>
                     <option value="daily">daily</option>
-                    <option value="long term ">long term task goals</option>
-                    <option value="short term">short term goals</option>
+                    <option value="long term ">long term task</option>
+                    <option value="short term">short term task</option>
                     <option value="health">health</option>
                     <option value="skills">skills</option>
                 </select>

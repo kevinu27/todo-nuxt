@@ -80,7 +80,7 @@ export const useAuthStore = defineStore('auth', { //'todo' nombre del store
         
         async setTime() {
             setTimeout(()=> {
-                refreshToken()
+                this.refreshToken()
                 // document.cookie = `refreshToken=${res.data.refresToken}; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/`;
             }, this.expiresIn * 1000-6000) // * 1000-6000 es pasar a milisegundos y despues restarle 6 segundos
         
