@@ -25,7 +25,7 @@ const closeModal = (e) => {
 }
 </script>
 
-<style>
+<style scoped>
 input {
   height: 2rem;
   width: 70%;

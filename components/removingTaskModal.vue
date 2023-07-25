@@ -6,7 +6,12 @@
                 <h1>X</h1>
             </div>
             <div class="modal-content">
-              <slot />
+
+              <h3> Are you sure you want to remove this task?</h3>
+              <div class="buttons">
+                <button class="accept-button">Yes</button>
+                <button class="cancel-button">No</button>
+              </div>
 
             </div>
         </div>
@@ -28,7 +33,7 @@ const closeModal = (e) => {
 }
 </script>
 
-<style>
+<style scoped>
 
 input {
   height: 2rem;
@@ -82,6 +87,22 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* border: 2px solid red; */
+
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid green; */
+  width: 100%;
+}
+.accept-button{
+background-color: green;
+margin-right: 1rem;
+}
+.cancel-button{
+background-color: red;
+margin-left: 1rem;
 
 }
 </style>
