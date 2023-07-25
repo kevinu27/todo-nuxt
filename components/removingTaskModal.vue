@@ -1,7 +1,7 @@
 <template>
-    <div> 
-        <div class="modal-overlay" v-if="authStore.loginModal || authStore.registerModal"></div>
-        <div class="modal" v-if="authStore.loginModal || authStore.registerModal">
+    <div class="whole"> 
+        <div class="modal-overlay-taskRemoval" v-if="tasksStore.stagingRemoval"></div>
+        <div class="modal" v-if="tasksStore.stagingRemoval">
             <div class="closingX" @click="closeModal">
                 <h1>X</h1>
             </div>
@@ -16,16 +16,20 @@
 
 <script setup>
 import { useAuthStore } from "~/store/auth";
+import { useTodoStore } from '~/store/todo';
+
+
+const tasksStore = useTodoStore()
 const authStore = useAuthStore();
 const closeModal = (e) => {
-  authStore.setAuthModalLogin(false)
-  authStore.setAuthModalRegister(false)
+  tasksStore.stagingRemoval = false
 
 
 }
 </script>
 
 <style>
+
 input {
   height: 2rem;
   width: 70%;
@@ -48,8 +52,9 @@ h1 {
   justify-content: flex-end;
   padding: 0px;
 }
-.modal-overlay {
+.modal-overlay-taskRemoval {
   position: fixed;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;

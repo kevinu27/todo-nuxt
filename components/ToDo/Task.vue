@@ -53,6 +53,8 @@ taskData.value =  props.task
 
 const removeTask = () => {
     showTask.value = false
+    tasksStore.stagingRemoval = true
+    console.log('tasksStore.stagingRemoval = true', tasksStore.stagingRemoval)
     setTimeout(function() {
         tasksStore.removeTasks(props.task._id)
 }, 3000)
@@ -102,10 +104,7 @@ const removeTask = () => {
     transform: rotate(-45deg);
 }
 .completition-bar{
-    /* background-color: red;
-    height: 5px;
-    width:40%;
-    margin-bottom: 1rem; */
+
     background-color:rgb(96, 96, 129);
     height: 10px;
     width: 70%;
@@ -114,7 +113,7 @@ const removeTask = () => {
 }
 .completition-bar-inner{
     background-color:rgb(0, 0, 128);
-    /* width: 40%; */
+
     height: 100%;
     border-radius: 5px;
 
@@ -122,17 +121,14 @@ const removeTask = () => {
 }
 
 .completition{
-    /* display: flex;
-    width: 100%;
-    justify-content: flex-start; */
     padding-left: 2rem;
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
 }
-.completetion-percentage{
+/* .completetion-percentage{
 
-}
+} */
 
 .fade2-leave-from{
     opacity: 1;

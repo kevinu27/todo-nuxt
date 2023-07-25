@@ -17,6 +17,9 @@
 
     </div>
        <!-- {{ tasksStore.tasks}} -->
+       <removingTaskModal v-if="tasksStore.stagingRemoval">
+ 
+    </removingTaskModal>
     </div>
 </template>
 
@@ -61,9 +64,7 @@ onMounted(() => {
 .fade-enter-active{
     transition: all 2s ease;
 }
-.fade-leave-from{}
-.fade-leave-to{}
-.fade-leave-active{}
+
 
 .spin{
     display: flex;

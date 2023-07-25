@@ -14,13 +14,14 @@ Nuxt To Do List
 <li>poner lo de las graficas con lo experado y lo conseguido </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
 <li> iconos para eliminar y editar?</li>
-<li> Dentro de la task si le doy a eliminar que elimine y me redirija a la pagina normal </li>
+<li> Dentro de la task si le doy a eliminar que elimine y me redirija a la pagina normal pero modal que me pregunte si estoy seguro que quiero eliminarla</li>
 <li> si entro en ruta prohibida que me redirija a la pagina normal </li>
-<li>Transiciones al eliminar elementos</li>
 <li>cambiar la fuente por defecto a sans serif</li>
 
 
 --------
 
 <li> acuerdate de cambiar el .env del backend en el render.com para el cors</li>
+kevin@kevin.com
+123123
 
