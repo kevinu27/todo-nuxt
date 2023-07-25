@@ -133,22 +133,14 @@ const removeTask = () => {
 .completetion-percentage{
 
 }
-.fade2-enter-from{
-}
-.fade2-enter-to{
-}
-.fade2-enter-active{
-}
-
 
 .fade2-leave-from{
     opacity: 1;
 }
 .fade2-leave-to{
     opacity: 0;
-
+    transform: translateX(-100px);
 }
-
 .fade2-leave-active{
     transition: all 2s ease;
 }
