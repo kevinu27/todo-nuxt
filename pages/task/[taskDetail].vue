@@ -129,6 +129,7 @@ const addsubTaskhandle = (e) => {
     e.preventDefault()
     //llamada la funcion en el action y e le pasan los valores y el 
     tasksStore.addSubtask(taskDetails._id, subtaskDescription.value)
+    subtaskDescription.value = ''
 }
 
 

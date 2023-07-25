@@ -1,21 +1,23 @@
 <template>
-   <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
-    <div class="task" >
-        <div class="closing"  ><span @click.prevent.stop="removeTask"> + </span></div>
-        <h1>
-            {{ props.task.taskName }}
-        </h1>
-        <p>
-           Priority: {{ props.task.priority }}
-        </p>
-        <p>
-            Deathline: {{ props.task.deathline }}
-        </p>
-        <p>
-            Category: {{ props.task.category }}
-        </p>  
-
-        <div class="completition">
+    <Transition name="fade2">  
+        <div v-if="showTask">
+            <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
+                <div class="task" >
+                    <div class="closing"  ><span @click.prevent.stop="removeTask"> + </span></div>
+                    <h1>
+                        {{ props.task.taskName }}
+                    </h1>
+                    <p>
+                        Priority: {{ props.task.priority }}
+                    </p>
+                    <p>
+                        Deathline: {{ props.task.deathline }}
+                    </p>
+                    <p>
+                        Category: {{ props.task.category }}
+                    </p>  
+                    
+                    <div class="completition">
             <span class="completition-title">
                 completition: 
             </span>
@@ -28,11 +30,15 @@
         </div>
     </div>
 </NuxtLink >
+</div>
+</Transition>
 </template>
 
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
+const showTask = ref(true)
+console.log('showtask', showTask.value )
 
 const tasksStore = useTodoStore()
 
@@ -46,7 +52,10 @@ taskData.value =  props.task
 })
 
 const removeTask = () => {
-    tasksStore.removeTasks(props.task._id)
+    showTask.value = false
+    setTimeout(function() {
+        tasksStore.removeTasks(props.task._id)
+}, 3000)
 }
 
 
@@ -123,5 +132,24 @@ const removeTask = () => {
 }
 .completetion-percentage{
 
+}
+.fade2-enter-from{
+}
+.fade2-enter-to{
+}
+.fade2-enter-active{
+}
+
+
+.fade2-leave-from{
+    opacity: 1;
+}
+.fade2-leave-to{
+    opacity: 0;
+
+}
+
+.fade2-leave-active{
+    transition: all 2s ease;
 }
 </style>
