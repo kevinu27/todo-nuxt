@@ -1,17 +1,13 @@
 <template>
     <div class="whole"> 
-        <div class="modal-overlay-taskRemoval" v-if="tasksStore.stagingRemoval"></div>
-        <div class="modal" v-if="tasksStore.stagingRemoval">
+        <div class="modal-overlay-taskRemoval" v-if="tasksStore.stagingRemovalModal"></div>
+        <div class="modal" v-if="tasksStore.stagingRemovalModal">
             <div class="closingX" @click="closeModal">
                 <h1>X</h1>
             </div>
             <div class="modal-content">
-
-              <h3> Are you sure you want to remove this task?</h3>
-              <div class="buttons">
-                <button class="accept-button">Yes</button>
-                <button class="cancel-button">No</button>
-              </div>
+              <slot />
+     
 
             </div>
         </div>
@@ -27,10 +23,11 @@ import { useTodoStore } from '~/store/todo';
 const tasksStore = useTodoStore()
 const authStore = useAuthStore();
 const closeModal = (e) => {
-  tasksStore.stagingRemoval = false
-
-
+  tasksStore.stagingRemovalModal = false
 }
+
+
+
 </script>
 
 <style scoped>
@@ -90,19 +87,5 @@ h1 {
   /* border: 2px solid red; */
 
 }
-.buttons{
-  display: flex;
-  justify-content: center;
-  /* border: 2px solid green; */
-  width: 100%;
-}
-.accept-button{
-background-color: green;
-margin-right: 1rem;
-}
-.cancel-button{
-background-color: red;
-margin-left: 1rem;
 
-}
 </style>

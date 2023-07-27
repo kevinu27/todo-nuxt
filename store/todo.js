@@ -12,7 +12,9 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
         currentTask: null,
         areTaskLoaded: false,
         searchBarFilters: ['Select a filter...','daily', 'long term task', 'short term task', 'health', 'skills'],
-        stagingRemoval: false
+        stagingRemovalModal: false,
+        removalConfirmationPositive: false,
+        taskIdToRemove: null
     }),
 
     actions: {

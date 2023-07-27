@@ -17,9 +17,7 @@
 
     </div>
        <!-- {{ tasksStore.tasks}} -->
-       <removingTaskModal v-if="tasksStore.stagingRemoval">
- 
-    </removingTaskModal>
+    
     </div>
 </template>
 

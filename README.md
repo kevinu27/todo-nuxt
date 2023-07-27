@@ -17,6 +17,7 @@ Nuxt To Do List
 <li> Dentro de la task si le doy a eliminar que elimine y me redirija a la pagina normal pero modal que me pregunte si estoy seguro que quiero eliminarla</li>
 <li> si entro en ruta prohibida que me redirija a la pagina normal </li>
 <li>cambiar la fuente por defecto a sans serif</li>
+<li> ver porque el modal no aparece con el ref en task.vue pero si con el store</li>
 
 
 --------

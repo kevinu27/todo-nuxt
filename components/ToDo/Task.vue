@@ -1,9 +1,18 @@
 <template>
+    <div>
+        <removingTaskModal v-if="tasksStore.stagingRemovalModal">
+    <h3> Are you sure you want to remove this task?</h3>
+              <div class="buttons">
+                <button class="accept-button" @click="aceptRemoval">Yes</button>
+                <button class="cancel-button" @click=" tasksStore.stagingRemovalModal = false">No</button>
+              </div>
+</removingTaskModal>
+    
     <Transition name="fade2">  
         <div v-if="showTask">
             <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
                 <div class="task" >
-                    <div class="closing"  ><span @click.prevent.stop="removeTask"> + </span></div>
+                    <div class="closing"  ><span @click.prevent.stop="stagingRemoval"> + </span></div>
                     <h1>
                         {{ props.task.taskName }}
                     </h1>
@@ -30,14 +39,16 @@
         </div>
     </div>
 </NuxtLink >
+
 </div>
-</Transition>
+</Transition></div>
 </template>
 
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
 const showTask = ref(true)
+const stagingRemovalModal = ref(false)
 console.log('showtask', showTask.value )
 
 const tasksStore = useTodoStore()
@@ -51,8 +62,17 @@ onMounted(() => {
 taskData.value =  props.task
 })
 
+
+const stagingRemoval = () => {
+    // stagingRemovalModal.value = true
+    tasksStore.stagingRemovalModal = true
+}
+
 const removeTask = () => {
+
+    
     showTask.value = false
+    tasksStore.stagingRemovalModal = true
     tasksStore.stagingRemoval = true
     console.log('tasksStore.stagingRemoval = true', tasksStore.stagingRemoval)
     setTimeout(function() {
@@ -61,6 +81,14 @@ const removeTask = () => {
 }
 
 
+const aceptRemoval = () => {
+//   tasksStore.removalConfirmationPositive = true eliminar esto del store
+removeTask()
+
+  tasksStore.stagingRemovalModal = false
+
+
+}
 </script>
 
 
@@ -140,4 +168,21 @@ const removeTask = () => {
 .fade2-leave-active{
     transition: all 2s ease;
 }
+.buttons{
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid green; */
+  width: 100%;
+}
+.accept-button{
+background-color: green;
+margin-right: 1rem;
+}
+.cancel-button{
+background-color: red;
+margin-left: 1rem;
+
+}
+
+
 </style>
