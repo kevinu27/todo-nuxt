@@ -16,7 +16,7 @@
                     
                 </div>
             </div>
-    <AuthModal v-if="authStore.loginModal">
+    <AuthModal v-if="authStore.loginModal" class="loginModal">
         <h1>Login</h1>
         <h3>email</h3>
         <input type="email" v-model="email"/>
@@ -26,7 +26,7 @@
         <button class="loginButton" @click="loginHandler">Login</button>
         <div><p>not registered yet? <span class="register-link" @click="changeToRegister"> Register </span></p></div>
     </AuthModal>
-    <AuthModal v-if="authStore.registerModal">
+    <AuthModal v-if="authStore.registerModal"  class="registerModal">
         <h1>Signup</h1>
         <h3>email</h3>
         <input type="email" v-model="email"/>
@@ -126,6 +126,13 @@ if (process.client) { // esto es para que no pete al comprobar localstorage
 </script>
 
 <style scoped>
+
+.loginModal{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.registerModal{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 .nav-bar{
     display: flex;
     justify-content: space-between;
