@@ -93,6 +93,8 @@ authStore.setAuthModalLogin(false)
 
 const logout = (e) => { // 
     authStore.logout()
+    navigateTo('/')
+
 }
 
 

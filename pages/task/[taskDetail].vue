@@ -1,5 +1,12 @@
 <template>
     <div class="taskDetail">
+        <removingTaskModal v-if="tasksStore.stagingRemovalModal">
+            <h3> Are you sure you want to remove this task?</h3>
+                    <div class="buttons">
+                        <button class="accept-button" @click="aceptRemoval">Yes</button>
+                        <button class="cancel-button" @click=" tasksStore.stagingRemovalModal = false">No</button>
+                    </div>
+        </removingTaskModal>
 
         <div class="taskDetailCard">
             <div v-if="!tasksStore.editTaskModal">
@@ -32,7 +39,7 @@
             <button class="button" @click="addsubTaskhandle">Add subtask</button>
             </form>
         
-            <div class="subtasks-card">
+            <div class="subtasks-card" v-if="tasksStore.tasks.subtasks">
                 <div v-for="subtask in tasksStore.tasks.find(task => task._id === route.params.taskDetail).subtasks" :key="subtask._id">
                     <ToDoSubtask :subtask="subtask"/>
                 </div>
@@ -119,6 +126,24 @@ const editTaskhandle = () => {
 }
 
 const removeTaskhandle = () => {
+    tasksStore.stagingRemovalModal = true
+
+}
+
+const aceptRemoval = () => {
+//   tasksStore.removalConfirmationPositive = true eliminar esto del store
+removeTask()
+
+  tasksStore.stagingRemovalModal = false
+
+
+}
+
+const removeTask = () => {
+
+    tasksStore.removeTasks(taskDetails._id)
+
+    navigateTo('/')
 
 }
 
