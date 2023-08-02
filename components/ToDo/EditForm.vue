@@ -72,7 +72,10 @@ const cancelEditing = async (e) => {
 
 const editTaskhandle = async (e) => {
     e.preventDefault()
+    console.log('editTaskhandle')
     tasksStore.editTasks(taskId.value, taskName.value, deathline.value, taskDescription.value, priority.value, category.value, taskStatus.value, taskStatus.value,  taskcompleted.value)
+    tasksStore.editTaskModal = false
+    ///updatear el estado cuando edite
 }
 
 </script>

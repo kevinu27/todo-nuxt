@@ -74,27 +74,9 @@ const taskCompleted = ref('')
 
 
 if(tasksStore.tasks.length === 0 || !authStore.token){
-    console.log('estoy intentado hacer rouert push')
     router.replace('/')
-    // router.push('/')
+
 }
-// const Router = useRouter();
-// Router.beforeEach(async(to, next) => {
-//     console.log('to----------', to.fullPath)
-//     return next('/')
-//         // if(authStore.token){
-//         // return next()
-//         // }
-//         // if(to.fullPath === "/protected" || localStorage.getItem('user') === "true"){
-//         //    authStore.refreshToken()
-//         //    if(authStore.token){
-//         //         return next()
-//         //    }
-//         //    return next('/')
-//         // }
-
-// })
-
 
 
 watch(taskCompleted, async (newTask, oldTask) => {

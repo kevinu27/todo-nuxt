@@ -34,7 +34,6 @@
                 </select>
             </div>
             <button class="button" @click="addTaskhandle">Add task</button>
-            <button class="btn btn-primary" >Add task</button>
             <template>
   <div>
     <b-button>Button</b-button>

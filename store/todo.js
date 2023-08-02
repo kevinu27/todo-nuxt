@@ -224,7 +224,8 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
       },
 
       async editTasks(taskId, taskName, deathline, taskDescription, priority, category, taskcompleted) {  
-          const api = axios.create({
+        console.log('editando', this.tasks)  
+        const api = axios.create({
               baseURL: "http://localhost:5000/api/v1",
               withCredentials: true
             });
@@ -249,6 +250,21 @@ export const useTodoStore = defineStore('todo', { //'todo' nombre del store
                     id: taskId
                 }
               });
+
+            //   this.tasks.forEach( task => {
+                // if(task._id === taskId){
+                    console.log('coincidie con ', taskId)
+                    const editedTask = this.tasks.find( task => task._id === taskId )
+                    editedTask.taskName = taskName
+                    editedTask.deathline = deathline
+                    editedTask.taskDescription = taskDescription
+                    editedTask.priority = priority
+                    editedTask.category = category
+                    editedTask.taskcompleted = taskcompleted
+                // }
+
+            //   })
+
 
           } catch (error) {
               console.log(error)

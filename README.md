@@ -2,13 +2,12 @@ Nuxt To Do List
 
 ## to do
 ## exenciales
-<li> mirar que pasa con el edit task
+
 
 <li>mirar por que me hace la llamada al refresh token cada vez que recargo  </li>
 <li>cambiar los localstorage user a false por remove localstorage asi no hace falta pregutnar si es una string o un booleano el true </li>
 <li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
-<li>cambiar la fuente por defecto a sans serif</li>
 <li> ver porque al refrescar dentro de una tarea me peta la pagina</li>
 
 ### opcionales
