@@ -11,18 +11,18 @@
         <div class="taskDetailCard">
             <div v-if="!tasksStore.editTaskModal">
                 <div>
-                    {{ taskDetails.taskName }}
+                    {{ taskDetails2?.taskName }}
                 </div>
                     
                 <div>
-                    {{ taskDetails.taskDescription }}
+                    {{ taskDetails2?.taskDescription }}
                 </div>
                 <div>
-                    {{ taskDetails.priority}}
+                    {{ taskDetails2?.priority}}
                 </div>
             </div>
             <div v-if="tasksStore.editTaskModal">
-                    <ToDoEditForm :taskDetails="taskDetails"/>
+                    <ToDoEditForm :taskDetails="taskDetails2"/>
             </div>
 
         <div class="subtasks">
@@ -64,34 +64,45 @@ const authStore = useAuthStore()
 const tasksStore = useTodoStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
-// import { useAuthStore } from '~/store/auth';
-// import { useRouter } from 'vue-router'
-// const router = useRouter()
+
+console.log('tasksStore.tasks---------!!!', tasksStore.tasks)
+if(!tasksStore.tasks.length){
+    console.log('no hay tasks', tasksStore.tasks.length)
+    navigateTo('/')
+}
+
 const subtasksForm = ref(false)
 const subtaskDescription = ref('')
 let taskcompleted = false
 const taskCompleted = ref('')
+const route = useRoute()
 
+const TaskDetalFromParams = route.params.taskDetail
+console.log('TaskDetalFromParams-', TaskDetalFromParams)
+const taskDetails2 = computed(() => {
+  return tasksStore.tasks.find(task => task._id === TaskDetalFromParams);
+});
+// taskDetails2.value  = tasksStore.tasks.find( task => task._id === TaskDetalFromParams )
+console.log('taskDetails2', taskDetails2.value)
 
 if(tasksStore.tasks.length === 0 || !authStore.token){
     router.replace('/')
-
 }
 
-
 watch(taskCompleted, async (newTask, oldTask) => {
+    console.log('taskDetails2.taskName', taskDetails2.value.taskName)
+    console.log('se ejecuta el watch')
     if(oldTask){
         taskcompleted = false
     }else {
         taskcompleted = true
     }
-    tasksStore.completeTasks(taskDetails._id, taskDetails.taskName, taskDetails.deathline, taskDetails.taskDescription, taskDetails.priority, taskDetails.category, taskDetails.taskStatus, taskcompleted)
+    tasksStore.completeTasks(taskDetails2._id, taskDetails2.value.taskName, taskDetails2.value.deathline, taskDetails2.taskDescription, taskDetails2.priority, taskDetails2.category, taskDetails2.taskStatus, taskcompleted)
 })
 
-const route = useRoute()
 const taskDetails = tasksStore.tasks.find(task => task._id === route.params.taskDetail)
-const taskCompletedFromTaskDetail = taskDetails.taskcompleted
-if(taskDetails.taskcompleted){
+const taskCompletedFromTaskDetail = taskDetails2.taskcompleted
+if(taskDetails2.taskcompleted){
     taskCompleted.value = true
 }else {
     taskCompleted.value = false
@@ -109,7 +120,6 @@ const editTaskhandle = () => {
 
 const removeTaskhandle = () => {
     tasksStore.stagingRemovalModal = true
-
 }
 
 const aceptRemoval = () => {
