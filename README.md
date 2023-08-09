@@ -9,7 +9,6 @@ Nuxt To Do List
 <li>cambiar los localstorage user a false por remove localstorage asi no hace falta pregutnar si es una string o un booleano el true </li>
 <li>ver poruqe si quito el requiereToken en las task route no me pasa al endpoint la llamada*** </li>
 <li>poner el color o un icono dependiendo de la fecha</li>
-<li> ver porque al refrescar dentro de una tarea me peta la pagina</li>
 
 ### opcionales
 <li>poner la fecha de la cookie que segun el expiresIn </li>

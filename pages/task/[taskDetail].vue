@@ -74,13 +74,12 @@ if(!tasksStore.tasks.length){
 const subtasksForm = ref(false)
 const subtaskDescription = ref('')
 let taskcompleted = false
-const taskCompleted = ref('')
 const route = useRoute()
 
 const TaskDetalFromParams = route.params.taskDetail
 console.log('TaskDetalFromParams-', TaskDetalFromParams)
 const taskDetails2 = computed(() => {
-  return tasksStore.tasks.find(task => task._id === TaskDetalFromParams);
+    return tasksStore.tasks.find(task => task._id === TaskDetalFromParams);
 });
 // taskDetails2.value  = tasksStore.tasks.find( task => task._id === TaskDetalFromParams )
 console.log('taskDetails2', taskDetails2.value)
@@ -88,6 +87,7 @@ console.log('taskDetails2', taskDetails2.value)
 if(tasksStore.tasks.length === 0 || !authStore.token){
     router.replace('/')
 }
+const taskCompleted = ref(taskDetails2.value.taskcompleted)
 
 watch(taskCompleted, async (newTask, oldTask) => {
     console.log('taskDetails2.taskName', taskDetails2.value.taskName)

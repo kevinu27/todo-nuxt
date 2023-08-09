@@ -1,10 +1,13 @@
 <template>
     <div class="main">
-        <section class="todo">
-        <ToDoSearchBar/>
-        <ToDoForm/>
-        <ToDoList v-if="authStore.token"/>
-    </section>
+        <section class="todo"  v-if="authStore.token">
+            <ToDoSearchBar />
+            <ToDoForm />
+            <ToDoList />
+        </section>
+        <section class="todo" v-else>
+            <h1> Login or register to see your pending tasks and create new ones</h1>
+        </section>
     </div>
 </template>
 
