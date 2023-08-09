@@ -94,6 +94,7 @@ watch(taskCompleted, async (newTask, oldTask) => {
     console.log('se ejecuta el watch')
     if(oldTask){
         taskcompleted = false
+        // return
     }else {
         taskcompleted = true
     }

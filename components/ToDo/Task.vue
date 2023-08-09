@@ -13,6 +13,7 @@
             <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
                 <div class="task" >
                     <div class="closing"  ><span @click.prevent.stop="stagingRemoval"> + </span></div>
+                    <div class="warning-icon">{{ isToday}}icono condicional si la deathline es hoy</div>
                     <h1>
                         {{ props.task.taskName }}
                     </h1>
@@ -49,7 +50,7 @@
 import { useTodoStore } from '~/store/todo';
 const showTask = ref(true)
 const stagingRemovalModal = ref(false)
-console.log('showtask', showTask.value )
+// console.log('showtask', showTask.value )
 
 const tasksStore = useTodoStore()
 
@@ -62,6 +63,54 @@ onMounted(() => {
 taskData.value =  props.task
 })
 
+const isToday = computed(() => {
+    const now = new Date();
+    const day = parseInt(props.task.deathline.slice(-2))
+    const month = parseInt(props.task.deathline.slice(5, 7))
+
+    let dayIsGood 
+    let monthIsGood
+    console.log('now.getDate()',  now.getDate()) 
+    console.log('day',  day) 
+    
+    if(now.getDate() < day){
+         dayIsGood = true
+         console.log('now.getDate() < day',  dayIsGood)
+    }else {
+        
+        dayIsGood = false
+        console.log('not now.getDate() < day',  dayIsGood)
+    }
+   
+    if(now.getMonth()+1 < month){
+         monthIsGood = true
+        console.log('now.getMonth() <= month',  monthIsGood)
+
+    }else {
+         monthIsGood = false
+        console.log(' not now.getMonth() <= month',  monthIsGood)
+
+    }
+if(monthIsGood && dayIsGood){
+    return true
+}
+if(now.getMonth()+1 === month && dayIsGood){
+    console.log('entro aqui')
+    console.log('now.getMonth()', now.getMonth())
+    return true
+}
+
+    if(monthIsGood ){
+        if(dayIsGood){
+            return true
+        }else {
+            return false
+        }
+    }else {
+        return false
+    }
+
+});
 
 const stagingRemoval = () => {
     // stagingRemovalModal.value = true
@@ -89,6 +138,7 @@ removeTask()
 
 
 }
+console.log('--------')
 </script>
 
 
@@ -184,6 +234,9 @@ background-color: red;
 margin-left: 1rem;
 
 }
-
+.warning-icon{
+    display: flex;
+    justify-content: center;
+}
 
 </style>
