@@ -13,7 +13,23 @@
             <NuxtLink :to="`/task/${props.task._id}`" class="big-task"> 
                 <div class="task" >
                     <div class="closing"  ><span @click.prevent.stop="stagingRemoval"> + </span></div>
-                    <div class="warning-icon">{{ isToday}}icono condicional si la deathline es hoy</div>
+                    <div class="warning-icon" v-if="!isToday">  
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="red"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            width="30" 
+                            height="30" 
+                            >
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12" y2="16" />
+                        </svg>
+                    </div>
                     <h1>
                         {{ props.task.taskName }}
                     </h1>
@@ -38,19 +54,20 @@
                 </span>
             </div>
         </div>
-    </div>
-</NuxtLink >
+        </div>
+        </NuxtLink >
 
+        </div>
+</Transition>
 </div>
-</Transition></div>
 </template>
 
 
 <script setup>
 import { useTodoStore } from '~/store/todo';
 const showTask = ref(true)
-const stagingRemovalModal = ref(false)
 // console.log('showtask', showTask.value )
+console.log('props.task._id para el removal---', props.task._id)
 
 const tasksStore = useTodoStore()
 
@@ -62,6 +79,7 @@ const taskData = ref('')
 onMounted(() => {
 taskData.value =  props.task
 })
+// console.log('taskData.value---', taskData.value)
 
 const isToday = computed(() => {
     const now = new Date();
@@ -70,34 +88,37 @@ const isToday = computed(() => {
 
     let dayIsGood 
     let monthIsGood
-    console.log('now.getDate()',  now.getDate()) 
-    console.log('day',  day) 
+    // console.log('now.getDate()',  now.getDate()) 
+    // console.log('day',  day) 
     
     if(now.getDate() < day){
          dayIsGood = true
-         console.log('now.getDate() < day',  dayIsGood)
+        //  console.log('now.getDate() < day',  dayIsGood)
     }else {
         
         dayIsGood = false
-        console.log('not now.getDate() < day',  dayIsGood)
+        // console.log('not now.getDate() < day',  dayIsGood)
     }
    
     if(now.getMonth()+1 < month){
          monthIsGood = true
-        console.log('now.getMonth() <= month',  monthIsGood)
+        // console.log('now.getMonth() <= month',  monthIsGood)
 
     }else {
          monthIsGood = false
-        console.log(' not now.getMonth() <= month',  monthIsGood)
+        // console.log(' not now.getMonth() <= month',  monthIsGood)
 
     }
 if(monthIsGood && dayIsGood){
     return true
 }
 if(now.getMonth()+1 === month && dayIsGood){
-    console.log('entro aqui')
-    console.log('now.getMonth()', now.getMonth())
+    // console.log('entro aqui')
+    // console.log('now.getMonth()', now.getMonth())
     return true
+}
+if(!monthIsGood && !dayIsGood){
+    return false
 }
 
     if(monthIsGood ){
@@ -115,6 +136,9 @@ if(now.getMonth()+1 === month && dayIsGood){
 const stagingRemoval = () => {
     // stagingRemovalModal.value = true
     tasksStore.stagingRemovalModal = true
+    tasksStore.taskIdToRemove = props.task._id
+console.log('tasksStore.taskIdToRemove---', tasksStore.taskIdToRemove)
+
 }
 
 const removeTask = () => {
@@ -123,9 +147,9 @@ const removeTask = () => {
     showTask.value = false
     tasksStore.stagingRemovalModal = true
     tasksStore.stagingRemoval = true
-    console.log('tasksStore.stagingRemoval = true', tasksStore.stagingRemoval)
+    console.log('props.task._id para el removal', props.task._id)
     setTimeout(function() {
-        tasksStore.removeTasks(props.task._id)
+        tasksStore.removeTasks( tasksStore.taskIdToRemove)
 }, 3000)
 }
 
